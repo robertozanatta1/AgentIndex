@@ -1,0 +1,38 @@
+import Link from "next/link";
+import { getUseCases } from "@/lib/data";
+import UseCaseCard from "@/components/UseCaseCard";
+import SponsorSlot from "@/components/SponsorSlot";
+import SubscribeForm from "@/components/SubscribeForm";
+export default function Home() {
+  const all = getUseCases();
+  const cats = Array.from(new Set(all.map((u) => u.category)));
+  return (
+    <main>
+      <section className="glow">
+        <div className="mx-auto max-w-6xl px-6 pt-6"><SponsorSlot /></div>
+        <div className="mx-auto max-w-4xl px-6 pb-16 pt-20 text-center">
+          <p className="mb-4 text-sm font-medium text-violet-300">{all.length}+ playbooks · updated weekly</p>
+          <h1 className="text-5xl font-bold tracking-tight sm:text-6xl">AgentIndex</h1>
+          <p className="mt-4 bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-2xl font-medium text-transparent sm:text-3xl">Proven AI agent use cases you can copy today</p>
+          <p className="mx-auto mt-6 max-w-2xl text-zinc-400">Stop guessing what agents are good for. Every entry is a concrete workflow — the tools, the steps, the guardrails — used by founders and operators to save hours every week.</p>
+          <div id="newsletter" className="relative mt-10 flex flex-col items-center gap-4"><SubscribeForm />
+            <Link href="/sponsor" className="text-sm text-zinc-400 hover:text-white">Reach 1,000s of AI builders → <span className="text-violet-300 underline underline-offset-4">Sponsor us</span></Link>
+          </div>
+        </div>
+      </section>
+      <section id="usecases" className="mx-auto max-w-6xl px-6">
+        <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+          <h2 className="text-2xl font-semibold">Browse use cases</h2>
+          <div className="flex flex-wrap gap-2">{cats.map((c) => <span key={c} className="rounded-full border border-white/10 px-3 py-1 text-xs text-zinc-400">{c}</span>)}</div>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{all.map((u) => <UseCaseCard key={u.slug} u={u} />)}</div>
+      </section>
+      <section className="mx-auto mt-20 max-w-6xl px-6">
+        <div className="flex flex-col items-center justify-between gap-6 rounded-3xl border border-accent/30 bg-gradient-to-br from-accent/20 to-fuchsia-500/10 p-10 sm:flex-row">
+          <div><h3 className="text-2xl font-semibold">Put your AI product in front of builders</h3><p className="mt-2 text-zinc-300">Homepage placement and newsletter features for teams shipping agents.</p></div>
+          <Link href="/sponsor" className="rounded-full bg-white px-6 py-3 font-medium text-black hover:bg-zinc-200">Sponsor us</Link>
+        </div>
+      </section>
+    </main>
+  );
+}

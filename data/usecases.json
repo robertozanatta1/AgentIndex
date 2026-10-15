@@ -1,0 +1,307 @@
+[
+  {
+    "slug": "ai-sdr-that-books-meetings-from-inbound-leads",
+    "title": "AI SDR that books meetings from inbound leads",
+    "category": "Sales",
+    "description": "An agent enriches every new inbound lead with Clearbit-style data, scores fit, writes a personalized reply, and offers calendar slots within 2 minutes.",
+    "tags": [
+      "Sales",
+      "Email",
+      "CRM"
+    ],
+    "tools": [
+      "HubSpot",
+      "Calendly",
+      "Gmail"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5\u201310 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "cold-outreach-researcher",
+    "title": "Cold outreach researcher",
+    "category": "Sales",
+    "description": "For each prospect, the agent reads their site, recent posts and funding news, then drafts a 3-line opener that references something real.",
+    "tags": [
+      "Sales",
+      "Research"
+    ],
+    "tools": [
+      "LinkedIn",
+      "Apollo",
+      "Web search"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5\u201310 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "tier-1-support-autopilot",
+    "title": "Tier-1 support autopilot",
+    "category": "Support",
+    "description": "Answers common tickets from your help docs, tags and routes the rest, and escalates angry customers to a human with a summary.",
+    "tags": [
+      "Support",
+      "Helpdesk"
+    ],
+    "tools": [
+      "Zendesk",
+      "Intercom",
+      "Docs"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5\u201310 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "refund-order-status-agent",
+    "title": "Refund & order-status agent",
+    "category": "Support",
+    "description": "Looks up orders in Shopify, answers 'where is my order', and processes refunds under a policy threshold automatically.",
+    "tags": [
+      "Support",
+      "E-commerce"
+    ],
+    "tools": [
+      "Shopify",
+      "Stripe"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5\u201310 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "competitor-intel-daily-brief",
+    "title": "Competitor intel daily brief",
+    "category": "Research",
+    "description": "Monitors competitor sites, changelogs, pricing pages and X accounts, then emails a 5-bullet morning brief of what changed.",
+    "tags": [
+      "Research",
+      "Strategy"
+    ],
+    "tools": [
+      "Web scraping",
+      "X",
+      "Email"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5\u201310 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "market-sizing-analyst",
+    "title": "Market sizing analyst",
+    "category": "Research",
+    "description": "Given a niche, the agent gathers public data, builds a TAM/SAM/SOM estimate with sources, and outputs a one-page memo.",
+    "tags": [
+      "Research",
+      "Finance"
+    ],
+    "tools": [
+      "Web search",
+      "Sheets"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5\u201310 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "newsletter-ghostwriter",
+    "title": "Newsletter ghostwriter",
+    "category": "Content",
+    "description": "Collects the week's best links in your niche, drafts a newsletter in your voice, and queues it for review in Beehiiv or Resend.",
+    "tags": [
+      "Content",
+      "Newsletter"
+    ],
+    "tools": [
+      "Beehiiv",
+      "Resend",
+      "RSS"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5\u201310 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "video-to-thread-repurposer",
+    "title": "Video-to-thread repurposer",
+    "category": "Content",
+    "description": "Transcribes your YouTube or podcast episode and turns it into an X thread, a LinkedIn post, and 5 short-clip timestamps.",
+    "tags": [
+      "Content",
+      "Social"
+    ],
+    "tools": [
+      "YouTube",
+      "Whisper",
+      "X"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5\u201310 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "invoice-chaser",
+    "title": "Invoice chaser",
+    "category": "Ops",
+    "description": "Watches unpaid invoices, sends polite escalating reminders, and flags accounts 30+ days overdue to the founder.",
+    "tags": [
+      "Ops",
+      "Finance"
+    ],
+    "tools": [
+      "QuickBooks",
+      "Stripe",
+      "Gmail"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5\u201310 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "meeting-to-tasks-operator",
+    "title": "Meeting-to-tasks operator",
+    "category": "Ops",
+    "description": "Joins calls, writes the summary, creates tasks in Linear or Asana with owners and due dates, and follows up when they slip.",
+    "tags": [
+      "Ops",
+      "Productivity"
+    ],
+    "tools": [
+      "Zoom",
+      "Linear",
+      "Slack"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5\u201310 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "pr-review-bug-fix-agent",
+    "title": "PR review & bug-fix agent",
+    "category": "Coding",
+    "description": "Reviews every pull request for bugs and style, and opens fix PRs for failing CI or issues tagged 'good-first-bug'.",
+    "tags": [
+      "Coding",
+      "DevOps"
+    ],
+    "tools": [
+      "GitHub",
+      "CI"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5\u201310 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "directory-site-operator",
+    "title": "Directory site operator",
+    "category": "Coding",
+    "description": "Builds and runs a niche directory: adds listings, ships SEO pages, manages sponsors and the newsletter \u2014 the model behind this site.",
+    "tags": [
+      "Coding",
+      "Ops",
+      "Business"
+    ],
+    "tools": [
+      "Next.js",
+      "Vercel",
+      "Stripe"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5\u201310 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "inbox-zero-chief-of-staff",
+    "title": "Inbox zero chief of staff",
+    "category": "Personal productivity",
+    "description": "Triages your email every morning, drafts replies for approval, unsubscribes junk, and surfaces the 3 things that need you.",
+    "tags": [
+      "Productivity",
+      "Email"
+    ],
+    "tools": [
+      "Gmail",
+      "Calendar"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5\u201310 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "travel-planner",
+    "title": "Travel planner",
+    "category": "Personal productivity",
+    "description": "Finds flights and hotels matching your preferences and calendar, builds an itinerary, and holds options for one-tap booking.",
+    "tags": [
+      "Productivity",
+      "Travel"
+    ],
+    "tools": [
+      "Calendar",
+      "Web search"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5\u201310 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  }
+]
