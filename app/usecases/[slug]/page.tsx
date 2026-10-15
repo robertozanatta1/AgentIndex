@@ -22,7 +22,7 @@ export default function Page({ params }: { params: { slug: string } }) {
       <h2 className="mt-10 text-xl font-semibold">How to set it up</h2>
       <ol className="mt-3 space-y-3">{u.steps.map((s, i) => <li key={i} className="flex gap-3 text-zinc-300"><span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-accent/20 text-xs text-violet-300">{i + 1}</span>{s}</li>)}</ol>
       {u.link && <a href={u.link} target="_blank" rel="noopener" className="mt-8 inline-block text-violet-300 underline">Learn more →</a>}
-      <div className="mt-16 rounded-2xl border border-white/10 bg-white/[0.03] p-6"><p className="mb-4 font-medium">Get new agent playbooks every week</p><SubscribeForm /></div>
+      <div className="mt-16 rounded-2xl border border-white/10 bg-white/[0.03] p-6"><p className="mb-4 font-medium">Get new agent playbooks by email</p><SubscribeForm /></div>
     </article></main>
   );
 }

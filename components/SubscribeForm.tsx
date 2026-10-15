@@ -13,7 +13,7 @@ export default function SubscribeForm() {
       <input type="email" required value={email} onChange={(e) => setEmail(e.target.value)} placeholder="you@company.com"
         className="flex-1 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm outline-none placeholder:text-zinc-500 focus:border-accent" />
       <button disabled={state === "loading"} className="rounded-xl bg-accent px-5 py-3 text-sm font-medium text-white hover:opacity-90 disabled:opacity-60">
-        {state === "loading" ? "Joining…" : "Get weekly use cases"}
+        {state === "loading" ? "Joining…" : "Get new use cases"}
       </button>
       {state === "ok" && <p className="text-sm text-emerald-400 sm:absolute sm:mt-14">You're in. 🎉</p>}
       {state === "err" && <p className="text-sm text-red-400 sm:absolute sm:mt-14">Something went wrong — try again.</p>}
