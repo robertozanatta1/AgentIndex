@@ -11,12 +11,12 @@ export default function Home() {
       <section className="glow">
         <div className="mx-auto max-w-6xl px-6 pt-6"><SponsorSlot /></div>
         <div className="mx-auto max-w-4xl px-6 pb-16 pt-20 text-center">
-          <p className="mb-4 text-sm font-medium text-violet-300">{all.length}+ playbooks · updated weekly</p>
+          <p className="mb-4 text-sm font-medium text-violet-300">{all.length} playbooks · we'll grow this catalog over time</p>
           <h1 className="text-5xl font-bold tracking-tight sm:text-6xl">AgentIndex</h1>
           <p className="mt-4 bg-gradient-to-r from-white to-zinc-400 bg-clip-text text-2xl font-medium text-transparent sm:text-3xl">Proven AI agent use cases you can copy today</p>
-          <p className="mx-auto mt-6 max-w-2xl text-zinc-400">Stop guessing what agents are good for. Every entry is a concrete workflow — the tools, the steps, the guardrails — used by founders and operators to save hours every week.</p>
+          <p className="mx-auto mt-6 max-w-2xl text-zinc-400">Stop guessing what agents are good for. Every entry is a concrete workflow — the tools, the steps, the guardrails — written for founders and operators who want to put agents to work.</p>
           <div id="newsletter" className="relative mt-10 flex flex-col items-center gap-4"><SubscribeForm />
-            <Link href="/sponsor" className="text-sm text-zinc-400 hover:text-white">Reach 1,000s of AI builders → <span className="text-violet-300 underline underline-offset-4">Sponsor us</span></Link>
+            <Link href="/sponsor" className="text-sm text-zinc-400 hover:text-white">Reach operators and founders who browse AgentIndex for agent workflows → <span className="text-violet-300 underline underline-offset-4">Sponsor us</span></Link>
           </div>
         </div>
       </section>
