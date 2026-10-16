@@ -307,5 +307,583 @@
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
     "link": ""
+  },
+  {
+    "slug": "weekly-arxiv-research-digest",
+    "title": "Weekly arXiv research digest",
+    "category": "Research",
+    "description": "An agent pulls new papers matching your keywords each week, summarizes each in 3 bullets, and flags the few worth reading in full.",
+    "tags": [
+      "Research",
+      "Summaries",
+      "Scheduled"
+    ],
+    "tools": [
+      "ChatGPT",
+      "arXiv API",
+      "Gmail"
+    ],
+    "steps": [
+      "List 5–10 keywords and arXiv categories you follow.",
+      "Have the agent query the arXiv API for papers from the last 7 days.",
+      "Ask for a 3-bullet summary per paper plus a 'why it matters to me' line based on your stated interests.",
+      "Rank and keep the top 10; send as one email digest.",
+      "Each week, mark which picks were useful and add that feedback to the prompt."
+    ],
+    "link": "https://info.arxiv.org/help/api/index.html"
+  },
+  {
+    "slug": "customer-interview-synthesizer",
+    "title": "Customer interview synthesizer",
+    "category": "Research",
+    "description": "Turns a batch of interview transcripts into recurring themes, direct quotes, and open questions, with every claim linked to a transcript.",
+    "tags": [
+      "Research",
+      "Product",
+      "Transcripts"
+    ],
+    "tools": [
+      "Claude",
+      "Google Docs"
+    ],
+    "steps": [
+      "Export transcripts as text files (one per interview).",
+      "Ask the agent to extract pains, jobs-to-be-done, and objections per interview, with verbatim quotes.",
+      "Have it cluster findings across interviews and count how many interviews mention each theme.",
+      "Require a transcript reference for every quote so you can verify.",
+      "Review and edit the themes doc before sharing it with the team."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "support-macro-drafter",
+    "title": "Support macro drafter from resolved tickets",
+    "category": "Support",
+    "description": "Reads your last month of solved tickets, finds the most repeated questions, and drafts reusable reply macros for a human to approve.",
+    "tags": [
+      "Support",
+      "Helpdesk",
+      "Knowledge base"
+    ],
+    "tools": [
+      "Zendesk",
+      "ChatGPT"
+    ],
+    "steps": [
+      "Export ~200 recently solved tickets (question + final agent reply).",
+      "Ask the agent to group them by intent and rank groups by volume.",
+      "For the top 10 intents, draft a macro using your best-performing past replies as the source.",
+      "Have a support lead review tone and policy accuracy before publishing.",
+      "Repeat monthly and retire macros that are no longer used."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "support-ticket-triage-tagger",
+    "title": "Support ticket triage and tagging",
+    "category": "Support",
+    "description": "Classifies each incoming ticket by topic, urgency, and sentiment, and routes it to the right queue with a suggested first reply.",
+    "tags": [
+      "Support",
+      "Routing",
+      "Automation"
+    ],
+    "tools": [
+      "Intercom",
+      "Zapier",
+      "Claude"
+    ],
+    "steps": [
+      "Define a short tag list and urgency rules (e.g. outage, billing, how-to).",
+      "Trigger the agent on every new ticket via Zapier or a webhook.",
+      "Have it return JSON: tag, urgency, sentiment, suggested reply.",
+      "Apply tags automatically; keep replies as internal notes until accuracy is proven.",
+      "Spot-check 20 tickets a week and refine the rules."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "blog-post-from-outline",
+    "title": "Blog post drafts from a rough outline",
+    "category": "Content",
+    "description": "Expands your bullet outline into a first draft in your voice, using your past posts as style references, while leaving facts for you to check.",
+    "tags": [
+      "Content",
+      "Writing",
+      "SEO"
+    ],
+    "tools": [
+      "Claude",
+      "Google Docs"
+    ],
+    "steps": [
+      "Paste 2–3 of your past posts as style samples.",
+      "Give the agent a bullet outline and the target reader.",
+      "Ask for a draft that marks every factual claim with [CHECK].",
+      "Edit the draft yourself; verify each [CHECK] item.",
+      "Ask for 5 title options and a meta description at the end."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "podcast-show-notes",
+    "title": "Podcast show notes and chapters",
+    "category": "Content",
+    "description": "Takes an episode transcript and produces show notes, timestamped chapters, and a short list of pull quotes.",
+    "tags": [
+      "Content",
+      "Audio",
+      "Repurposing"
+    ],
+    "tools": [
+      "Whisper",
+      "ChatGPT"
+    ],
+    "steps": [
+      "Transcribe the episode with timestamps (Whisper or your host's transcript).",
+      "Ask the agent for a 100-word summary, 5–8 chapters with timestamps, and 3 pull quotes.",
+      "Check timestamps against the audio.",
+      "Paste into your podcast host and episode page."
+    ],
+    "link": "https://github.com/openai/whisper"
+  },
+  {
+    "slug": "weekly-metrics-report",
+    "title": "Weekly metrics report writer",
+    "category": "Ops",
+    "description": "Pulls numbers from your dashboards each Monday and writes a short plain-English report of what changed and what to look into.",
+    "tags": [
+      "Ops",
+      "Reporting",
+      "Scheduled"
+    ],
+    "tools": [
+      "Google Sheets",
+      "ChatGPT",
+      "Slack"
+    ],
+    "steps": [
+      "Keep your key metrics in one sheet with a row per week.",
+      "Schedule the agent to read the latest two weeks every Monday.",
+      "Ask for: biggest changes, possible causes to investigate, and nothing speculative stated as fact.",
+      "Post the draft to a private Slack channel for review before sharing."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "grocery-meal-planner",
+    "title": "Weekly meal plan and grocery list",
+    "category": "Personal productivity",
+    "description": "Plans a week of dinners around your diet, budget, and what's already in the fridge, then outputs a grocery list grouped by store aisle.",
+    "tags": [
+      "Personal",
+      "Food",
+      "Planning"
+    ],
+    "tools": [
+      "ChatGPT",
+      "Apple Notes"
+    ],
+    "steps": [
+      "Tell the agent household size, dietary limits, budget, and cooking time per night.",
+      "List what's already in your fridge and pantry.",
+      "Ask for 5 dinners that reuse ingredients, plus a grocery list grouped by aisle.",
+      "Save as a checklist in your notes app; tweak and reuse winning weeks."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "vendor-contract-reviewer",
+    "title": "Vendor contract first-pass reviewer",
+    "category": "Ops",
+    "description": "Reads a vendor contract and lists renewal terms, notice periods, liability caps, and unusual clauses so you know what to ask a lawyer.",
+    "tags": [
+      "Ops",
+      "Legal",
+      "Procurement"
+    ],
+    "tools": [
+      "Claude",
+      "Google Drive"
+    ],
+    "steps": [
+      "Upload the contract PDF.",
+      "Ask for a table: term, auto-renewal, notice period, price changes, liability, data handling, termination.",
+      "Ask it to quote the exact clause for each item.",
+      "Flag anything unusual; get legal review for anything that matters. This is not legal advice."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "test-writer-for-legacy-code",
+    "title": "Test writer for untested legacy code",
+    "category": "Coding",
+    "description": "An agent reads an untested module, writes characterization tests that lock in current behavior, and runs them until they pass.",
+    "tags": [
+      "Coding",
+      "Testing",
+      "Refactoring"
+    ],
+    "tools": [
+      "Cursor",
+      "Claude Code"
+    ],
+    "steps": [
+      "Pick one module with no tests.",
+      "Ask the agent to write tests describing what the code does today, not what it should do.",
+      "Have it run the test suite and fix the tests (not the code) until green.",
+      "Review the tests, commit them, then refactor with a safety net."
+    ],
+    "link": "https://docs.cursor.com"
+  },
+  {
+    "slug": "dependency-upgrade-agent",
+    "title": "Dependency upgrade agent",
+    "category": "Coding",
+    "description": "Upgrades one outdated dependency at a time, reads the changelog, fixes breaking changes, and opens a PR per upgrade.",
+    "tags": [
+      "Coding",
+      "Maintenance",
+      "GitHub"
+    ],
+    "tools": [
+      "Claude Code",
+      "GitHub",
+      "npm"
+    ],
+    "steps": [
+      "Run `npm outdated` (or your package manager's equivalent).",
+      "Ask the agent to upgrade one package, read its changelog, and fix breakages.",
+      "Require the build and tests to pass before it opens a PR.",
+      "Review and merge one PR at a time."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "codebase-onboarding-guide",
+    "title": "Codebase onboarding guide generator",
+    "category": "Coding",
+    "description": "Explores a repo and writes a guide for new contributors: architecture, where things live, how to run it, and common gotchas.",
+    "tags": [
+      "Coding",
+      "Docs",
+      "Onboarding"
+    ],
+    "tools": [
+      "Cursor",
+      "Claude Code"
+    ],
+    "steps": [
+      "Open the repo in your agent and ask for a tour of the top-level structure.",
+      "Ask it to trace one real request or feature end to end.",
+      "Have it write ONBOARDING.md with setup steps it actually ran.",
+      "Ask a new teammate to follow it and fix what's wrong."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "lead-list-enricher",
+    "title": "Lead list enricher",
+    "category": "Sales",
+    "description": "Takes a CSV of company names and adds website, what they do, and a one-line personalization hook from public pages, marking anything it couldn't find.",
+    "tags": [
+      "Sales",
+      "Research",
+      "CSV"
+    ],
+    "tools": [
+      "ChatGPT",
+      "Google Sheets"
+    ],
+    "steps": [
+      "Prepare a CSV of company names (and domains if you have them).",
+      "Ask the agent to browse each company's site and fill in: description, size signal, recent news.",
+      "Require 'not found' instead of guesses.",
+      "Spot-check 10 rows before using the list for outreach."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "call-prep-brief",
+    "title": "Sales call prep brief",
+    "category": "Sales",
+    "description": "Before each sales call, writes a one-page brief on the company, the attendees' public roles, and good discovery questions.",
+    "tags": [
+      "Sales",
+      "Meetings",
+      "Research"
+    ],
+    "tools": [
+      "Google Calendar",
+      "Claude",
+      "LinkedIn"
+    ],
+    "steps": [
+      "Trigger on calendar events with external attendees.",
+      "Have the agent research the company site, recent news, and attendee titles.",
+      "Ask for a one-page brief: context, likely priorities, 5 discovery questions.",
+      "Read it 10 minutes before the call."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "receipt-expense-categorizer",
+    "title": "Receipt and expense categorizer",
+    "category": "Finance",
+    "description": "Reads receipts forwarded to an inbox, extracts vendor, amount, date, and category, and appends them to a spreadsheet for monthly bookkeeping.",
+    "tags": [
+      "Finance",
+      "Bookkeeping",
+      "Email"
+    ],
+    "tools": [
+      "Gmail",
+      "ChatGPT",
+      "Google Sheets"
+    ],
+    "steps": [
+      "Set up a label or address for forwarded receipts.",
+      "Have the agent extract vendor, date, amount, currency, and category from each.",
+      "Append rows to a sheet; flag low-confidence items for review.",
+      "Reconcile against your bank statement monthly."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "subscription-audit",
+    "title": "Subscription and recurring charge audit",
+    "category": "Finance",
+    "description": "Scans a few months of bank or card statements, lists every recurring charge, and highlights duplicates and things you may have forgotten.",
+    "tags": [
+      "Finance",
+      "Personal",
+      "Savings"
+    ],
+    "tools": [
+      "Claude",
+      "CSV export"
+    ],
+    "steps": [
+      "Export 3 months of transactions as CSV from your bank.",
+      "Ask the agent to find recurring merchants and their frequency and amount.",
+      "Have it flag duplicates, price increases, and unfamiliar charges.",
+      "Cancel what you don't use yourself; the agent only makes the list."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "job-application-tailor",
+    "title": "Job application tailor",
+    "category": "Personal productivity",
+    "description": "Compares your resume to a job posting, lists gaps and matching experience, and drafts a tailored cover letter you edit before sending.",
+    "tags": [
+      "Personal",
+      "Careers",
+      "Writing"
+    ],
+    "tools": [
+      "ChatGPT"
+    ],
+    "steps": [
+      "Paste your resume and the job description.",
+      "Ask for matched requirements, gaps, and which experience to move up.",
+      "Ask for a short cover letter using only facts from your resume.",
+      "Edit in your own voice before applying."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "sql-question-answerer",
+    "title": "Plain-English questions to SQL",
+    "category": "Data",
+    "description": "Lets teammates ask questions about your database in plain English; the agent writes read-only SQL, runs it, and shows both the query and the result.",
+    "tags": [
+      "Data",
+      "SQL",
+      "Analytics"
+    ],
+    "tools": [
+      "Claude",
+      "Postgres (read-only role)",
+      "Metabase"
+    ],
+    "steps": [
+      "Create a read-only database role for the agent.",
+      "Give the agent your schema and a few example queries with explanations.",
+      "Have it always show the SQL alongside the answer.",
+      "Review wrong answers and add them as examples to the prompt."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "review-response-drafter",
+    "title": "Customer review response drafter",
+    "category": "Marketing",
+    "description": "The agent watches new Google and app store reviews, drafts on-brand replies for approval, and escalates 1–2 star reviews that mention bugs or refunds to support.",
+    "tags": [
+      "Marketing",
+      "Support"
+    ],
+    "tools": [
+      "Google Business Profile",
+      "App Store Connect",
+      "Slack"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5–10 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "incident-postmortem-drafter",
+    "title": "Incident postmortem drafter",
+    "category": "Engineering",
+    "description": "After an outage the agent pulls the alert timeline, incident Slack channel and deploy log into a blameless postmortem draft with timeline, impact and follow-ups.",
+    "tags": [
+      "Engineering",
+      "DevOps"
+    ],
+    "tools": [
+      "PagerDuty",
+      "Slack",
+      "GitHub"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5–10 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "rfp-answer-assistant",
+    "title": "RFP and security questionnaire assistant",
+    "category": "Sales",
+    "description": "The agent answers vendor questionnaires from your approved knowledge base, cites the source doc for each answer, and flags anything it is unsure about for a human.",
+    "tags": [
+      "Sales",
+      "Security"
+    ],
+    "tools": [
+      "Google Drive",
+      "Notion"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5–10 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "release-notes-writer",
+    "title": "Release notes from merged PRs",
+    "category": "Engineering",
+    "description": "On each release tag the agent groups merged PRs into features, fixes and breaking changes, then writes customer-facing release notes in plain English.",
+    "tags": [
+      "Engineering",
+      "Writing"
+    ],
+    "tools": [
+      "GitHub",
+      "Notion"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5–10 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "churn-risk-flagger",
+    "title": "Churn risk flagger",
+    "category": "Customer success",
+    "description": "Weekly, the agent looks for accounts with falling usage, failed payments or angry tickets and posts a short list with the reason and a suggested outreach note.",
+    "tags": [
+      "Customer success",
+      "Analytics"
+    ],
+    "tools": [
+      "Stripe",
+      "Intercom",
+      "Slack"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5–10 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "bank-reconciliation-helper",
+    "title": "Bank reconciliation helper",
+    "category": "Finance",
+    "description": "The agent matches bank feed transactions to invoices and bills, suggests categories for the rest, and leaves anything ambiguous for your bookkeeper to confirm.",
+    "tags": [
+      "Finance",
+      "Bookkeeping"
+    ],
+    "tools": [
+      "QuickBooks",
+      "Xero"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5–10 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "resume-screening-assistant",
+    "title": "Resume screening assistant",
+    "category": "Hiring",
+    "description": "For each applicant the agent compares the resume to the job's must-haves, writes a short evidence-based summary, and leaves the final decision to the hiring manager.",
+    "tags": [
+      "Hiring",
+      "HR"
+    ],
+    "tools": [
+      "Greenhouse",
+      "Google Sheets"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5–10 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "docs-localization-agent",
+    "title": "Docs and UI string localization",
+    "category": "Product",
+    "description": "When English docs or UI strings change, the agent translates the diff into your target languages using a glossary, and opens a PR for native-speaker review.",
+    "tags": [
+      "Product",
+      "Localization"
+    ],
+    "tools": [
+      "GitHub",
+      "DeepL"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5–10 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
   }
 ]
