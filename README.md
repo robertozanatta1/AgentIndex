@@ -18,3 +18,6 @@ See `.env.example`. Stripe Payment Link URLs go in `NEXT_PUBLIC_STRIPE_LINK_HOME
 
 ## Deploy
 Push to GitHub, import in Vercel, set env vars, deploy.
+
+## Contact
+Owner: robertozanatta1@gmail.com
