@@ -20,7 +20,7 @@ export async function POST(req: Request) {
     if (process.env.RESEND_API_KEY && to && from) {
       await fetch("https://api.resend.com/emails", {
         method: "POST", headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, "Content-Type": "application/json" },
-        body: JSON.stringify({ from, to, subject: "New AgentIndex sponsorship", text: `Mark as sponsored in data/usecases.json:\n${JSON.stringify(info, null, 2)}` }),
+        body: JSON.stringify({ from, to, subject: s.metadata?.product === "pro" ? "New AgentIndex Pro subscriber" : "New AgentIndex sponsorship", text: `Mark as sponsored in data/usecases.json:\n${JSON.stringify(info, null, 2)}` }),
       }).catch((e) => console.error("[stripe] notify failed", e));
     }
   }
