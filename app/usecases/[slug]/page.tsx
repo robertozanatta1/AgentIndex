@@ -12,7 +12,14 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const u = getUseCase(params.slug);
   if (!u) return {};
-  return { title: u.title, description: u.description, alternates: { canonical: `/usecases/${u.slug}` } };
+  const title = u.seoTitle ? { absolute: u.seoTitle } : u.title;
+  const description = u.seoDescription ?? u.description;
+  return {
+    title,
+    description,
+    alternates: { canonical: `/usecases/${u.slug}` },
+    openGraph: { title: u.seoTitle ?? u.title, description, url: `/usecases/${u.slug}` },
+  };
 }
 
 export default function Page({ params }: { params: { slug: string } }) {
@@ -32,7 +39,8 @@ export default function Page({ params }: { params: { slug: string } }) {
             </span>
           )}
         </div>
-        <h1 className="mt-3 text-4xl font-bold tracking-tight">{u.title}</h1>
+        <h1 className="mt-3 text-4xl font-bold tracking-tight">{u.h1 ?? u.title}</h1>
+        {u.intro && <p className="mt-4 text-zinc-300">{u.intro}</p>}
         <p className="mt-4 text-lg text-zinc-300">{u.description}</p>
         <div className="mt-6 flex flex-wrap gap-2">
           {u.tags.map((t) => (

@@ -22,7 +22,11 @@
     ],
     "link": "",
     "sponsored": true,
-    "sponsorRank": 1
+    "sponsorRank": 1,
+    "seoTitle": "AI Sales Agent (AI SDR) That Books Meetings",
+    "seoDescription": "An AI sales agent that enriches inbound leads, scores fit, writes a personal reply and books meetings in minutes. Tools and setup steps.",
+    "h1": "AI agent for sales: an AI SDR that books meetings",
+    "intro": "An AI sales agent works every inbound lead the moment it arrives. It enriches the contact, scores fit against your ideal customer, drafts a personalized reply and offers calendar slots, usually within two minutes. This playbook covers the CRM, email and scheduling tools to connect, the guardrails to set, and how to review results before you let it run on its own."
   },
   {
     "slug": "cold-outreach-researcher",
@@ -68,7 +72,11 @@
     ],
     "link": "",
     "sponsored": true,
-    "sponsorRank": 2
+    "sponsorRank": 2,
+    "seoTitle": "AI Agent for Customer Support: Tier-1 Autopilot",
+    "seoDescription": "Set up an AI agent for customer support that answers tier-1 tickets, cites your help docs and escalates edge cases. Tools and steps inside.",
+    "h1": "AI agent for customer support",
+    "intro": "An AI agent for customer support can resolve the repetitive tier-1 tickets that fill most queues: password resets, order questions, how-to requests. This playbook shows how to connect your help desk and knowledge base, set clear escalation rules, and test on real tickets before going live, so customers get fast, accurate answers and your human team focuses on the hard cases."
   },
   {
     "slug": "refund-order-status-agent",
@@ -220,7 +228,11 @@
       "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
-    "link": ""
+    "link": "",
+    "seoTitle": "AI Meeting Assistant: Notes to Tasks Agent",
+    "seoDescription": "An AI meeting assistant that turns calls into summaries, decisions and assigned tasks in your project tool. Tools and setup steps.",
+    "h1": "AI agent for meetings: notes to tasks",
+    "intro": "An AI meeting assistant listens to your calls, writes a short summary, records decisions and turns every action item into an assigned task in your project tool. This playbook shows which recorder, notes and task tools to connect, how to confirm owners and due dates, and how to send a recap to attendees so follow-ups stop slipping through the cracks."
   },
   {
     "slug": "pr-review-bug-fix-agent",
@@ -241,7 +253,11 @@
       "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
-    "link": ""
+    "link": "",
+    "seoTitle": "AI Coding Agent for PR Review and Bug Fixes",
+    "seoDescription": "An AI coding agent that reviews pull requests, catches bugs and proposes fixes before merge. Tools, guardrails and setup steps.",
+    "h1": "AI agent for code review and bug fixes",
+    "intro": "An AI coding agent can review every pull request as it opens, flag likely bugs, security issues and missing tests, and propose a fix as a suggested change. This playbook covers connecting your repo and CI, setting rules for what the agent may change, and keeping humans in charge of the merge button so speed never costs you code quality."
   },
   {
     "slug": "directory-site-operator",
@@ -285,7 +301,11 @@
       "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
-    "link": ""
+    "link": "",
+    "seoTitle": "AI Email Agent: Inbox Zero Chief of Staff",
+    "seoDescription": "Use an AI email agent to triage your inbox, draft replies, flag what matters and reach inbox zero daily. Tools, rules and setup steps.",
+    "h1": "AI agent for email: inbox zero chief of staff",
+    "intro": "An AI agent for email acts like a chief of staff for your inbox. It sorts incoming mail, archives noise, drafts replies in your voice and surfaces the few messages that need you today. This playbook explains which tools to connect, how to write approval rules so nothing sends without your OK, and how to build a daily digest that keeps you at inbox zero."
   },
   {
     "slug": "travel-planner",

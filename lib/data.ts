@@ -4,6 +4,10 @@ import sponsor from "@/data/sponsor.json";
 export type UseCase = {
   slug: string;
   title: string;
+  seoTitle?: string;
+  seoDescription?: string;
+  h1?: string;
+  intro?: string;
   category: string;
   description: string;
   tags: string[];
