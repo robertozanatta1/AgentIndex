@@ -9,7 +9,7 @@ export default function Privacy() {
       <h2>What we collect</h2>
       <ul>
         <li><strong>Email address</strong>: when you join the newsletter or the Pro waitlist.</li>
-        <li><strong>Sponsor details</strong>: if you buy a sponsorship, your name, email, and the listing or URL you want promoted.</li>
+        <li><strong>Customer details</strong>: if you buy a sponsorship or Pro, your name, email, and the listing or URL you want promoted.</li>
         <li><strong>Payment information</strong>: handled entirely by Stripe. We never see or store your full card number. We receive limited details from Stripe such as your name, email, billing country and payment status.</li>
         <li><strong>Basic technical data</strong>: our host keeps standard server logs (such as IP address, browser type and pages requested) for security and reliability.</li>
       </ul>

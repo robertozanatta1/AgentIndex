@@ -4,6 +4,7 @@ import UseCaseBrowser from "@/components/UseCaseBrowser";
 import SponsorSlot from "@/components/SponsorSlot";
 import SubscribeForm from "@/components/SubscribeForm";
 import ProCta from "@/components/ProCta";
+import ProCheckoutButton from "@/components/ProCheckoutButton";
 export default function Home() {
   const all = getUseCases();
   return (
@@ -17,7 +18,7 @@ export default function Home() {
           <p className="mx-auto mt-6 max-w-2xl text-zinc-400">Stop guessing what agents are good for. Every entry is a concrete workflow — the tools, the steps, the guardrails — written for founders and operators who want to put agents to work.</p>
           <div id="newsletter" className="relative mt-10 flex flex-col items-center gap-4"><SubscribeForm />
             <Link href="/sponsor" className="text-sm text-zinc-400 hover:text-white">Reach operators and founders who browse AgentIndex for agent workflows → <span className="text-violet-300 underline underline-offset-4">Sponsor us</span></Link>
-            <Link href="/pro" className="rounded-full border border-violet-400/50 px-5 py-2 text-sm font-medium text-violet-200 hover:bg-violet-500/10">AgentIndex Pro: join the free waitlist</Link>
+            <ProCheckoutButton className="rounded-full border border-violet-400/50 px-5 py-2 text-sm font-medium text-violet-200 hover:bg-violet-500/10" />
           </div>
         </div>
       </section>

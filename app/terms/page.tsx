@@ -23,8 +23,8 @@ export default function Terms() {
         <li>We don't give refunds or partial refunds for unused time, except where the law requires one or as described above.</li>
         <li>We will give you at least 30 days' notice by email before changing the price of an active sponsorship.</li>
       </ul>
-      <h2>Pro waitlist</h2>
-      <p>Joining the Pro waitlist is free. We will tell you before any paid Pro plan starts, and we will only charge you if you choose to subscribe.</p>
+      <h2>AgentIndex Pro</h2>
+      <p>Pro costs $29/month, billed in advance through Stripe, and renews automatically until you cancel. You can cancel anytime and keep Pro until the end of the paid period. We don't give partial refunds, except where the law requires one. Features marked "Coming soon" on the Pro page are not yet available, and paying for Pro does not guarantee when they will ship.</p>
       <h2>No warranty and limits on liability</h2>
       <p>The site is provided "as is", without guarantees that it will always be available or error-free. As far as the law allows, AgentIndex is not liable for indirect or consequential losses. Our total liability to you is limited to the amount you paid us in the 3 months before the claim.</p>
       <h2>Governing law</h2>
