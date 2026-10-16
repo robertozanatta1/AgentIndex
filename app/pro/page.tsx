@@ -21,7 +21,7 @@ export default function Pro() {
           <li key={f.name}><div className="flex items-center gap-2 font-medium">{f.name}<span className="rounded-full border border-white/20 px-2 py-0.5 text-xs text-zinc-300">{f.status}</span></div>
             <p className="text-sm text-zinc-400">{f.text}</p></li>))}</ul>
         {checkout ? <><p className="mt-6 text-sm text-zinc-500">Cancel anytime. Billed monthly through Stripe.</p>
-        <ProCheckoutButton fallbackHref={`mailto:${contactEmail}?subject=${encodeURIComponent("AgentIndex Pro waitlist")}`} /></>
+        <ProCheckoutButton fallbackHref={`mailto:${contactEmail}?subject=${encodeURIComponent("AgentIndex Pro")}`} /></>
         : <div className="mt-8"><p className="mb-3 text-sm text-zinc-300">Pro is free while we build it. Join the waitlist and you'll get launch alerts now. We'll email you before any paid plan starts, and nothing is charged.</p><SubscribeForm list="pro-waitlist" cta="Join the Pro waitlist" /></div>}
       </div>
     </div></main>
