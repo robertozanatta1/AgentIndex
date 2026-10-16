@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getUseCase, getUseCases } from "@/lib/data";
 import SubscribeForm from "@/components/SubscribeForm";
+import ProCta from "@/components/ProCta";
 
 export function generateStaticParams() {
   return getUseCases().map((u) => ({ slug: u.slug }));
@@ -67,6 +68,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           <SubscribeForm />
         </div>
       </article>
+      <div className="mx-auto mt-12 max-w-3xl px-6 pb-16"><ProCta compact /></div>
     </main>
   );
 }

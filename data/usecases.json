@@ -735,7 +735,8 @@
       "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
-    "link": ""
+    "link": "",
+    "addedAt": "2026-10-16"
   },
   {
     "slug": "incident-postmortem-drafter",
@@ -757,7 +758,8 @@
       "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
-    "link": ""
+    "link": "",
+    "addedAt": "2026-10-16"
   },
   {
     "slug": "rfp-answer-assistant",
@@ -778,7 +780,8 @@
       "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
-    "link": ""
+    "link": "",
+    "addedAt": "2026-10-16"
   },
   {
     "slug": "release-notes-writer",
@@ -799,7 +802,8 @@
       "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
-    "link": ""
+    "link": "",
+    "addedAt": "2026-10-16"
   },
   {
     "slug": "churn-risk-flagger",
@@ -821,7 +825,8 @@
       "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
-    "link": ""
+    "link": "",
+    "addedAt": "2026-10-16"
   },
   {
     "slug": "bank-reconciliation-helper",
@@ -842,7 +847,8 @@
       "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
-    "link": ""
+    "link": "",
+    "addedAt": "2026-10-16"
   },
   {
     "slug": "resume-screening-assistant",
@@ -863,7 +869,8 @@
       "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
-    "link": ""
+    "link": "",
+    "addedAt": "2026-10-16"
   },
   {
     "slug": "docs-localization-agent",
@@ -884,6 +891,7 @@
       "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
-    "link": ""
+    "link": "",
+    "addedAt": "2026-10-16"
   }
 ]

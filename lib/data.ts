@@ -10,6 +10,8 @@ export type UseCase = {
   tools: string[];
   steps: string[];
   link?: string;
+  /** ISO date (YYYY-MM-DD) the use case was added; drives weekly launch alerts. */
+  addedAt?: string;
   /** When true, listing ranks above organic matches in search (must still match filters). */
   sponsored?: boolean;
   /** Lower number = higher priority among sponsored listings. */
