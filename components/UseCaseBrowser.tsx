@@ -3,18 +3,34 @@ import { useMemo, useState } from "react";
 import type { UseCase } from "@/lib/data";
 import UseCaseCard from "@/components/UseCaseCard";
 
+function matchesQuery(u: UseCase, terms: string[], cat: string | null) {
+  if (cat && u.category !== cat) return false;
+  if (!terms.length) return true;
+  const hay = [u.title, u.description, u.category, ...u.tags, ...u.tools].join(" ").toLowerCase();
+  return terms.every((t) => hay.includes(t));
+}
+
+/** Sponsored matches first (by sponsorRank, then title), then organic in catalog order. */
+function rankResults(filtered: UseCase[]): UseCase[] {
+  const sponsored = filtered
+    .filter((u) => u.sponsored)
+    .sort(
+      (a, b) =>
+        (a.sponsorRank ?? 999) - (b.sponsorRank ?? 999) ||
+        a.title.localeCompare(b.title)
+    );
+  const organic = filtered.filter((u) => !u.sponsored);
+  return [...sponsored, ...organic];
+}
+
 export default function UseCaseBrowser({ all }: { all: UseCase[] }) {
   const [q, setQ] = useState("");
   const [cat, setCat] = useState<string | null>(null);
   const cats = useMemo(() => Array.from(new Set(all.map((u) => u.category))), [all]);
   const results = useMemo(() => {
     const terms = q.toLowerCase().trim().split(/\s+/).filter(Boolean);
-    return all.filter((u) => {
-      if (cat && u.category !== cat) return false;
-      if (!terms.length) return true;
-      const hay = [u.title, u.description, u.category, ...u.tags, ...u.tools].join(" ").toLowerCase();
-      return terms.every((t) => hay.includes(t));
-    });
+    const filtered = all.filter((u) => matchesQuery(u, terms, cat));
+    return rankResults(filtered);
   }, [all, q, cat]);
   const chip = (active: boolean) =>
     `rounded-full border px-3 py-1 text-xs transition ${active ? "border-accent/60 bg-accent/15 text-violet-200" : "border-white/10 text-zinc-400 hover:border-white/30 hover:text-white"}`;
