@@ -37,3 +37,24 @@ Push to GitHub, import in Vercel, set env vars, deploy.
 
 ## Contact
 Owner: robertozanatta1@gmail.com
+
+## Payments (Stripe) & newsletter (Resend)
+
+Set these in Vercel → Project `agentindex` → Settings → Environment Variables. Everything degrades gracefully if unset.
+
+| Var | Purpose |
+|---|---|
+| `STRIPE_SECRET_KEY` | Server key for Checkout (`/api/checkout`) |
+| `STRIPE_SPONSOR_PRICE_ID` | Price ID for "Sponsored listing". Default plan: **$99/month recurring**. Create in Stripe Dashboard → Products → Add product → recurring $99/mo → copy `price_...` |
+| `STRIPE_SPONSOR_MODE` | Optional. `payment` for a one-time price (e.g. $149); default `subscription` |
+| `STRIPE_WEBHOOK_SECRET` | Stripe → Developers → Webhooks → endpoint `https://getagentindex.com/api/stripe/webhook`, event `checkout.session.completed` → copy `whsec_...` |
+| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Reserved for future embedded checkout (not required for hosted Checkout) |
+| `RESEND_API_KEY` | Resend API key |
+| `RESEND_AUDIENCE_ID` | Optional. Adds signups to a Resend Audience |
+| `NEWSLETTER_FROM` | Verified sender, e.g. `AgentIndex <hello@getagentindex.com>` (domain must be verified in Resend) |
+| `CONTACT_EMAIL` | Owner inbox for new-sponsorship notifications |
+| `NEXT_PUBLIC_SITE_URL` | `https://getagentindex.com` (Checkout redirect URLs) |
+
+**Sponsorship persistence:** listings are static (`data/usecases.json`). The webhook logs and emails `CONTACT_EMAIL`; set `sponsored: true` + `sponsorRank` on the listing and redeploy (see `/admin/sponsors`). TODO: move to Vercel KV/Postgres for automatic activation.
+
+**Newsletter fallback:** without Resend, signups go to `data/subscribers.json` (works locally only; Vercel FS is read-only).
