@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { contactEmail } from "@/lib/data";
+import Link from "next/link";
 import SponsorCheckoutButton from "@/components/SponsorCheckoutButton";
 export const metadata: Metadata = { title: "Sponsor", description: "Reach founders and operators building with AI agents. Homepage and newsletter sponsorships." };
 const tiers: { name: string; price: string; period: string; link?: string; perks: string[]; highlight?: boolean; checkout?: boolean }[] = [
@@ -26,6 +27,15 @@ export default function Sponsor() {
           </div>
         ))}
       </div>
+      <section id="disclosure" className="mx-auto mt-16 max-w-3xl rounded-3xl border border-white/10 bg-white/[0.03] p-8 text-sm text-zinc-300">
+        <h2 className="text-lg font-semibold text-white">Sponsorship disclosure</h2>
+        <ul className="mt-4 list-disc space-y-2 pl-5">
+          <li>Paid placements are always labeled "Sponsored". Sponsored listings are shown above other results, but only when they match what the visitor searched or filtered for.</li>
+          <li>Sponsorship buys visibility, not an endorsement. We don't change our descriptions of other products because of a sponsorship, and sponsors don't get to edit other listings.</li>
+          <li>We may decline sponsors that are misleading, illegal, unsafe or off-topic.</li>
+          <li>Billing is monthly and you can cancel anytime. Your placement runs until the end of the paid period. There are no partial refunds, except where the law requires one. Full details are in our <Link href="/terms" className="text-violet-300 underline">Terms</Link> and <Link href="/privacy" className="text-violet-300 underline">Privacy Policy</Link>.</li>
+        </ul>
+      </section>
     </div></main>
   );
 }
