@@ -17,10 +17,12 @@
     "steps": [
       "Connect the tools listed below to your agent.",
       "Write a short instruction describing the goal, guardrails and approval rules.",
-      "Run it on 5\u201310 real examples and review outputs.",
+      "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
-    "link": ""
+    "link": "",
+    "sponsored": true,
+    "sponsorRank": 1
   },
   {
     "slug": "cold-outreach-researcher",
@@ -39,7 +41,7 @@
     "steps": [
       "Connect the tools listed below to your agent.",
       "Write a short instruction describing the goal, guardrails and approval rules.",
-      "Run it on 5\u201310 real examples and review outputs.",
+      "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
     "link": ""
@@ -61,10 +63,12 @@
     "steps": [
       "Connect the tools listed below to your agent.",
       "Write a short instruction describing the goal, guardrails and approval rules.",
-      "Run it on 5\u201310 real examples and review outputs.",
+      "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
-    "link": ""
+    "link": "",
+    "sponsored": true,
+    "sponsorRank": 2
   },
   {
     "slug": "refund-order-status-agent",
@@ -82,7 +86,7 @@
     "steps": [
       "Connect the tools listed below to your agent.",
       "Write a short instruction describing the goal, guardrails and approval rules.",
-      "Run it on 5\u201310 real examples and review outputs.",
+      "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
     "link": ""
@@ -104,7 +108,7 @@
     "steps": [
       "Connect the tools listed below to your agent.",
       "Write a short instruction describing the goal, guardrails and approval rules.",
-      "Run it on 5\u201310 real examples and review outputs.",
+      "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
     "link": ""
@@ -125,7 +129,7 @@
     "steps": [
       "Connect the tools listed below to your agent.",
       "Write a short instruction describing the goal, guardrails and approval rules.",
-      "Run it on 5\u201310 real examples and review outputs.",
+      "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
     "link": ""
@@ -147,7 +151,7 @@
     "steps": [
       "Connect the tools listed below to your agent.",
       "Write a short instruction describing the goal, guardrails and approval rules.",
-      "Run it on 5\u201310 real examples and review outputs.",
+      "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
     "link": ""
@@ -169,7 +173,7 @@
     "steps": [
       "Connect the tools listed below to your agent.",
       "Write a short instruction describing the goal, guardrails and approval rules.",
-      "Run it on 5\u201310 real examples and review outputs.",
+      "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
     "link": ""
@@ -191,7 +195,7 @@
     "steps": [
       "Connect the tools listed below to your agent.",
       "Write a short instruction describing the goal, guardrails and approval rules.",
-      "Run it on 5\u201310 real examples and review outputs.",
+      "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
     "link": ""
@@ -213,7 +217,7 @@
     "steps": [
       "Connect the tools listed below to your agent.",
       "Write a short instruction describing the goal, guardrails and approval rules.",
-      "Run it on 5\u201310 real examples and review outputs.",
+      "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
     "link": ""
@@ -234,7 +238,7 @@
     "steps": [
       "Connect the tools listed below to your agent.",
       "Write a short instruction describing the goal, guardrails and approval rules.",
-      "Run it on 5\u201310 real examples and review outputs.",
+      "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
     "link": ""
@@ -243,7 +247,7 @@
     "slug": "directory-site-operator",
     "title": "Directory site operator",
     "category": "Coding",
-    "description": "Builds and runs a niche directory: adds listings, ships SEO pages, manages sponsors and the newsletter \u2014 the model behind this site.",
+    "description": "Builds and runs a niche directory: adds listings, ships SEO pages, manages sponsors and the newsletter — the model behind this site.",
     "tags": [
       "Coding",
       "Ops",
@@ -257,7 +261,7 @@
     "steps": [
       "Connect the tools listed below to your agent.",
       "Write a short instruction describing the goal, guardrails and approval rules.",
-      "Run it on 5\u201310 real examples and review outputs.",
+      "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
     "link": ""
@@ -278,7 +282,7 @@
     "steps": [
       "Connect the tools listed below to your agent.",
       "Write a short instruction describing the goal, guardrails and approval rules.",
-      "Run it on 5\u201310 real examples and review outputs.",
+      "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
     "link": ""
@@ -299,7 +303,7 @@
     "steps": [
       "Connect the tools listed below to your agent.",
       "Write a short instruction describing the goal, guardrails and approval rules.",
-      "Run it on 5\u201310 real examples and review outputs.",
+      "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
     "link": ""
