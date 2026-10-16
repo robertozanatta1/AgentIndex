@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { getUseCases } from "@/lib/data";
-import UseCaseCard from "@/components/UseCaseCard";
+import UseCaseBrowser from "@/components/UseCaseBrowser";
 import SponsorSlot from "@/components/SponsorSlot";
 import SubscribeForm from "@/components/SubscribeForm";
 export default function Home() {
   const all = getUseCases();
-  const cats = Array.from(new Set(all.map((u) => u.category)));
   return (
     <main>
       <section className="glow">
@@ -21,11 +20,7 @@ export default function Home() {
         </div>
       </section>
       <section id="usecases" className="mx-auto max-w-6xl px-6">
-        <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-          <h2 className="text-2xl font-semibold">Browse use cases</h2>
-          <div className="flex flex-wrap gap-2">{cats.map((c) => <span key={c} className="rounded-full border border-white/10 px-3 py-1 text-xs text-zinc-400">{c}</span>)}</div>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{all.map((u) => <UseCaseCard key={u.slug} u={u} />)}</div>
+        <UseCaseBrowser all={all} />
       </section>
       <section className="mx-auto mt-20 max-w-6xl px-6">
         <div className="flex flex-col items-center justify-between gap-6 rounded-3xl border border-accent/30 bg-gradient-to-br from-accent/20 to-fuchsia-500/10 p-10 sm:flex-row">
