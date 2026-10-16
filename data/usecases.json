@@ -710,5 +710,176 @@
       "Review wrong answers and add them as examples to the prompt."
     ],
     "link": ""
+  },
+  {
+    "slug": "review-response-drafter",
+    "title": "Customer review response drafter",
+    "category": "Marketing",
+    "description": "The agent watches new Google and app store reviews, drafts on-brand replies for approval, and escalates 1–2 star reviews that mention bugs or refunds to support.",
+    "tags": [
+      "Marketing",
+      "Support"
+    ],
+    "tools": [
+      "Google Business Profile",
+      "App Store Connect",
+      "Slack"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5–10 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "incident-postmortem-drafter",
+    "title": "Incident postmortem drafter",
+    "category": "Engineering",
+    "description": "After an outage the agent pulls the alert timeline, incident Slack channel and deploy log into a blameless postmortem draft with timeline, impact and follow-ups.",
+    "tags": [
+      "Engineering",
+      "DevOps"
+    ],
+    "tools": [
+      "PagerDuty",
+      "Slack",
+      "GitHub"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5–10 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "rfp-answer-assistant",
+    "title": "RFP and security questionnaire assistant",
+    "category": "Sales",
+    "description": "The agent answers vendor questionnaires from your approved knowledge base, cites the source doc for each answer, and flags anything it is unsure about for a human.",
+    "tags": [
+      "Sales",
+      "Security"
+    ],
+    "tools": [
+      "Google Drive",
+      "Notion"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5–10 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "release-notes-writer",
+    "title": "Release notes from merged PRs",
+    "category": "Engineering",
+    "description": "On each release tag the agent groups merged PRs into features, fixes and breaking changes, then writes customer-facing release notes in plain English.",
+    "tags": [
+      "Engineering",
+      "Writing"
+    ],
+    "tools": [
+      "GitHub",
+      "Notion"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5–10 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "churn-risk-flagger",
+    "title": "Churn risk flagger",
+    "category": "Customer success",
+    "description": "Weekly, the agent looks for accounts with falling usage, failed payments or angry tickets and posts a short list with the reason and a suggested outreach note.",
+    "tags": [
+      "Customer success",
+      "Analytics"
+    ],
+    "tools": [
+      "Stripe",
+      "Intercom",
+      "Slack"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5–10 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "bank-reconciliation-helper",
+    "title": "Bank reconciliation helper",
+    "category": "Finance",
+    "description": "The agent matches bank feed transactions to invoices and bills, suggests categories for the rest, and leaves anything ambiguous for your bookkeeper to confirm.",
+    "tags": [
+      "Finance",
+      "Bookkeeping"
+    ],
+    "tools": [
+      "QuickBooks",
+      "Xero"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5–10 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "resume-screening-assistant",
+    "title": "Resume screening assistant",
+    "category": "Hiring",
+    "description": "For each applicant the agent compares the resume to the job's must-haves, writes a short evidence-based summary, and leaves the final decision to the hiring manager.",
+    "tags": [
+      "Hiring",
+      "HR"
+    ],
+    "tools": [
+      "Greenhouse",
+      "Google Sheets"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5–10 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
+  },
+  {
+    "slug": "docs-localization-agent",
+    "title": "Docs and UI string localization",
+    "category": "Product",
+    "description": "When English docs or UI strings change, the agent translates the diff into your target languages using a glossary, and opens a PR for native-speaker review.",
+    "tags": [
+      "Product",
+      "Localization"
+    ],
+    "tools": [
+      "GitHub",
+      "DeepL"
+    ],
+    "steps": [
+      "Connect the tools listed below to your agent.",
+      "Write a short instruction describing the goal, guardrails and approval rules.",
+      "Run it on 5–10 real examples and review outputs.",
+      "Schedule it (cron or trigger) and review a weekly digest."
+    ],
+    "link": ""
   }
 ]
