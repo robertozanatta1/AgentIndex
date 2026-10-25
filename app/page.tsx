@@ -1,10 +1,12 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { getUseCases } from "@/lib/data";
 import UseCaseBrowser from "@/components/UseCaseBrowser";
 import SponsorSlot from "@/components/SponsorSlot";
 import SubscribeForm from "@/components/SubscribeForm";
 import ProCta from "@/components/ProCta";
 import ProCheckoutButton from "@/components/ProCheckoutButton";
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 export default function Home() {
   const all = getUseCases();
   return (

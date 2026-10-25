@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import LegalPage, { legalContact } from "@/components/LegalPage";
-export const metadata: Metadata = { title: "Privacy Policy", description: "How AgentIndex collects and uses your information." };
+export const metadata: Metadata = { title: "Privacy Policy", description: "How AgentIndex collects and uses your information.", alternates: { canonical: "/privacy" } };
 export default function Privacy() {
   const mail = <a href={`mailto:${legalContact}`}>{legalContact}</a>;
   return (

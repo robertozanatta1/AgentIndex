@@ -3,7 +3,7 @@ import { contactEmail } from "@/lib/data";
 import ProCheckoutButton from "@/components/ProCheckoutButton";
 import SubscribeForm from "@/components/SubscribeForm";
 export const dynamic = "force-dynamic";
-export const metadata: Metadata = { title: "AgentIndex Pro", description: "AgentIndex Pro: $29/month. Launch alerts and early access to new AI agent use cases, rolling out to Pro members." };
+export const metadata: Metadata = { title: "AgentIndex Pro", description: "AgentIndex Pro: $29/month. Launch alerts and early access to new AI agent use cases, rolling out to Pro members.", alternates: { canonical: "/pro" } };
 const features: { name: string; status: "Available" | "Coming soon"; text: string }[] = [
   { name: "Advanced search", status: "Coming soon", text: "Filter by tool, category and tag combinations, with saved searches. Today everyone gets the standard search and filters." },
   { name: "Launch alerts for new agents", status: "Available", text: "A weekly email listing the agent use cases added that week. Waitlist members get it too." },

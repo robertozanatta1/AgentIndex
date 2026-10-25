@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import LegalPage, { legalContact } from "@/components/LegalPage";
-export const metadata: Metadata = { title: "Terms of Service", description: "Terms for using AgentIndex and buying sponsorships." };
+export const metadata: Metadata = { title: "Terms of Service", description: "Terms for using AgentIndex and buying sponsorships.", alternates: { canonical: "/terms" } };
 export default function Terms() {
   const mail = <a href={`mailto:${legalContact}`}>{legalContact}</a>;
   return (

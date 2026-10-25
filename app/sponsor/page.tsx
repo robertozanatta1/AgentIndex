@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { contactEmail } from "@/lib/data";
 import Link from "next/link";
 import SponsorCheckoutButton from "@/components/SponsorCheckoutButton";
-export const metadata: Metadata = { title: "Sponsor", description: "Reach founders and operators building with AI agents. Homepage and newsletter sponsorships." };
+export const metadata: Metadata = { title: "Sponsor", description: "Reach founders and operators building with AI agents. Homepage and newsletter sponsorships.", alternates: { canonical: "/sponsor" } };
 const tiers: { name: string; price: string; period: string; link?: string; perks: string[]; highlight?: boolean; checkout?: boolean }[] = [
   { name: "Sponsored listing", price: "$99", period: "/month", checkout: true, perks: ["Your use case pinned above organic results", "\"Sponsored\" badge (clearly labeled)", "Live within 24 hours of payment", "Cancel anytime"] },
   { name: "Homepage feature", price: "$500", period: "/month", link: process.env.NEXT_PUBLIC_STRIPE_LINK_HOMEPAGE, perks: ["Logo + tagline in the featured slot on every page view", "Dofollow link to your product", "Rotates in within 24 hours", "Cancel anytime"] },
