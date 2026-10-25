@@ -1,0 +1,589 @@
+{
+  "invoice-chaser": {
+    "problem": "For founders, freelancers and small finance teams who send invoices but don't have time to follow up on every late one. Reminders get forgotten, awkward follow-ups get put off, and cash sits in receivables longer than it should. This agent does the routine chasing on a schedule and hands you only the accounts that need a personal call.",
+    "setupSteps": [
+      "Connect QuickBooks (or Stripe Invoicing, if that's where you bill) with a read-only role first, so the agent can list open invoices, due dates, amounts and customer contacts without being able to edit or void anything.",
+      "Connect Gmail with permission to create drafts. Start in draft-only mode: the agent writes each reminder into your Drafts folder and you send it.",
+      "Write a reminder ladder: a friendly nudge 3 days after the due date, a firmer note at 14 days, and a final notice at 30 days that copies you. Save the three templates in a doc the agent reads every run.",
+      "Add a do-not-chase list (customers on a payment plan, disputed invoices, key accounts you handle personally) and tell the agent to skip anything on it.",
+      "Schedule a daily run (a cron job, Zapier schedule or your agent platform's scheduler) at a fixed morning time, so customers never get two reminders in one day.",
+      "Have the agent post a short daily summary to you by email or Slack: who got reminded, at which step, and which accounts crossed 30 days overdue.",
+      "After two or three weeks of reviewing drafts, decide whether step-1 nudges can send automatically. Keep the 30-day notices manual."
+    ],
+    "prompt": "You are an accounts-receivable assistant for {Company}.\nEvery morning:\n1. List all open invoices from QuickBooks (or Stripe) that are past due.\n2. Skip any customer on the do-not-chase list or any invoice marked disputed.\n3. For each remaining invoice, pick the reminder step by days overdue: 3-13 days = step 1, 14-29 = step 2, 30+ = step 3.\n4. Never send the same step twice for the same invoice. Check the Gmail thread history first.\n5. Draft the reminder in Gmail as a reply to the original invoice thread when one exists. Include the invoice number, amount, due date and payment link. Keep it under 120 words and polite.\n6. Do not offer discounts, payment plans or threaten collections. If the customer replied with a question or a dispute, stop and flag it for me instead.\n7. Send me one summary: reminders drafted, accounts 30+ days overdue, and anything you skipped and why.",
+    "guardrails": [
+      "Read-only accounting access. The agent never edits, voids or writes off invoices.",
+      "Draft-only email at first. A human reviews and sends until you trust the output.",
+      "Any reply from a customer (dispute, question, 'already paid') stops the sequence for that invoice and goes to a person.",
+      "30-day-plus notices and anything mentioning collections are always sent by a human.",
+      "Rate limit: at most one reminder per customer per run, and none on weekends or holidays."
+    ],
+    "example": {
+      "input": "Example open invoice: INV-1042, Acme Studio, $1,800.00, due 14 days ago, no reply to the original invoice email, not on the do-not-chase list.",
+      "output": "Example draft (step 2):\nSubject: Re: Invoice INV-1042 from {Company}\nHi Sam, a quick follow-up on invoice INV-1042 for $1,800.00, which was due on the 3rd. If it's already in process, thank you, and you can ignore this. If anything is holding it up, just reply and let me know. You can pay here: {payment link}.\nThanks, {Your name}\n\nSummary line: \"INV-1042 Acme Studio, step 2 drafted. No accounts over 30 days today.\""
+    },
+    "metrics": [
+      "Track days sales outstanding (DSO) before and after you turn the agent on.",
+      "Track how many reminders were drafted versus edited before sending, as a measure of draft quality.",
+      "Track the number of invoices that reach 30+ days overdue each month.",
+      "Track customer replies that were disputes or complaints, to catch a tone problem early."
+    ],
+    "faq": [
+      {
+        "q": "Can it send reminders automatically?",
+        "a": "It can, but start in draft-only mode. Once you've reviewed a few weeks of drafts and rarely edit them, you can let the first friendly nudge send on its own and keep the firmer steps manual."
+      },
+      {
+        "q": "Does it work with Stripe instead of QuickBooks?",
+        "a": "Yes. Stripe Invoicing exposes the same basics (status, due date, amount, customer email, hosted payment link), so the agent logic is the same. Use whichever system is your source of truth for what's been paid."
+      },
+      {
+        "q": "What if a customer says they already paid?",
+        "a": "The agent should stop chasing that invoice and flag it to you. Payment matching is a job for a person or for a reconciliation step, not for the reminder agent."
+      }
+    ],
+    "related": [
+      "bank-reconciliation-helper",
+      "receipt-expense-categorizer",
+      "subscription-audit"
+    ]
+  },
+  "receipt-expense-categorizer": {
+    "problem": "For solo founders, freelancers and small teams who collect receipts in their inbox and then spend an afternoon each month typing them into a spreadsheet. Receipts get missed, categories are inconsistent, and the bookkeeper keeps asking for the same details. This agent turns each forwarded receipt into a clean spreadsheet row as it arrives.",
+    "setupSteps": [
+      "Create a dedicated Gmail label or address (for example a +receipts alias) and set a filter so forwarded receipts land there. The agent only reads that label, not your whole inbox.",
+      "Set up a Google Sheet with fixed columns: date, vendor, amount, currency, tax, category, payment method, source email link and a needs-review flag.",
+      "Write your category list (the same one your bookkeeper or accounting software uses) into a second tab. The agent may only choose from that list.",
+      "Connect ChatGPT (or another model with file and image input) so it can read email bodies, PDF attachments and photographed receipts.",
+      "Trigger the agent on each new email in the label (Zapier, Make, Apps Script or your agent platform), so it extracts the fields and appends one row per receipt.",
+      "Tell it to set needs-review = yes whenever the total is unreadable, the currency is unclear, the category is a guess, or the same vendor and amount already appear that week.",
+      "Once a month, filter the sheet for needs-review rows, fix them, then export or sync the sheet to your accounting tool."
+    ],
+    "prompt": "You process receipts for bookkeeping.\nFor each email in the \"receipts\" label:\n1. Find the receipt in the body or attachments (PDF or image).\n2. Extract: date of purchase, vendor name, total amount, currency, tax amount if shown, and the last 4 digits of the card if shown.\n3. Choose a category ONLY from the list in the \"Categories\" tab. If none fits, use \"Uncategorized\".\n4. Append one row to the \"Expenses\" tab. Put the Gmail message link in the source column.\n5. Set needs_review = \"yes\" and write a short reason if: any field is unreadable, the category is a guess, it looks like a duplicate (same vendor + amount within 7 days), or it's a refund.\n6. Never invent a value. Leave a cell blank rather than guess.\n7. Apply the label \"receipts/processed\" to the email when done.",
+    "guardrails": [
+      "The agent reads one Gmail label only and can't send email.",
+      "Categories come from a fixed list, so there's no free-form invention.",
+      "Blank beats guessed. Uncertain fields are left empty and flagged.",
+      "A duplicate check on vendor + amount + date window protects against double-counting.",
+      "A person reviews flagged rows before anything goes to the accountant or tax filing."
+    ],
+    "example": {
+      "input": "Example: an email forwarded to receipts@ with a PDF from a software vendor showing 'Total: USD 49.00, Tax: 0.00, Paid with Visa ending 4242, Oct 2'.",
+      "output": "Example row appended:\ndate: Oct 2 | vendor: {Software vendor} | amount: 49.00 | currency: USD | tax: 0.00 | category: Software & subscriptions | payment: Visa 4242 | source: {Gmail link} | needs_review: no"
+    },
+    "metrics": [
+      "Track the share of rows flagged needs-review each month. It should fall as you refine the category list.",
+      "Track how many corrections you make during the monthly review.",
+      "Track time spent on monthly bookkeeping before and after.",
+      "Track receipts that arrived but never produced a row (compare label count to row count)."
+    ],
+    "faq": [
+      {
+        "q": "Can it read photos of paper receipts?",
+        "a": "Yes, if the model you connect accepts images. Faded or crumpled receipts are the most common cause of flagged rows, so keep the needs-review step."
+      },
+      {
+        "q": "Is the spreadsheet good enough for taxes?",
+        "a": "It's a working log, not a filed return. Have your accountant or bookkeeping software be the system of record and use the sheet to feed it."
+      },
+      {
+        "q": "How does it handle foreign currencies?",
+        "a": "Record the original amount and currency as printed. Do conversion in a separate column with a rate from a source you choose, rather than letting the agent guess a rate."
+      }
+    ],
+    "related": [
+      "subscription-audit",
+      "bank-reconciliation-helper",
+      "invoice-chaser"
+    ]
+  },
+  "review-response-drafter": {
+    "problem": "For local businesses, app teams and marketers who know replying to reviews matters but fall behind once volume picks up. Generic copy-paste replies read badly, and the 1-2 star reviews that mention a real bug or refund often sit unanswered. This agent drafts a specific reply for every new review and puts the urgent ones in front of support.",
+    "setupSteps": [
+      "Connect Google Business Profile (reviews read + reply permission for your locations) and App Store Connect (customer reviews API access with a key limited to that role).",
+      "Write a one-page brand voice note: tone, how you sign off, words to avoid, and what you never say publicly (refund amounts, account details, blame).",
+      "Create a Slack channel such as #review-replies. The agent posts each draft there with the original review, star rating and a link.",
+      "Set an escalation rule: 1-2 star reviews that mention a bug, crash, charge, refund or safety issue also get posted to your support channel with a summary.",
+      "Poll for new reviews on a schedule (hourly or daily depending on volume). Process each review only once by storing the review IDs already handled.",
+      "Approve drafts with a Slack reaction or button. Only approved replies are published back through the platform's reply API.",
+      "Review the past month's replies together once a month and update the voice note with anything you kept rewriting."
+    ],
+    "prompt": "You draft public replies to customer reviews for {Brand}.\nFor each new review:\n1. Read the rating, text, platform and location or app version.\n2. Draft a reply of 40-90 words that mentions something specific the reviewer said. Don't use a template opener.\n3. Follow the brand voice note. Never mention refund amounts, order numbers, personal data or internal team names in public.\n4. For 4-5 stars: thank them and reference the specific thing they liked.\n5. For 1-3 stars: acknowledge the problem, don't argue, and invite them to contact {support channel} so we can help.\n6. If the review mentions a bug, crash, billing problem, refund or safety concern, also write a 2-line summary for the support team and mark it ESCALATE.\n7. Post the draft to #review-replies. Never publish without approval.",
+    "guardrails": [
+      "Nothing is published without a human approval in Slack.",
+      "No personal or account details in public replies, ever.",
+      "Escalations go to support in parallel. The public reply doesn't replace actually fixing the issue.",
+      "Don't reply to reviews that appear to be spam or abuse. Flag them for a person to report through the platform instead.",
+      "Don't offer incentives in exchange for changing a review. Platform policies prohibit it."
+    ],
+    "example": {
+      "input": "Example review (App Store, 2 stars): \"Used to love this app but since the last update it crashes every time I try to export a PDF.\"",
+      "output": "Example draft reply:\n\"Thanks for sticking with us, and sorry the latest update broke PDF export for you. That's not the experience we want. Could you email {support address} with your device model so our team can look into it directly? We'd like to get exporting working again for you.\"\n\nExample escalation: ESCALATE: crash on PDF export since the latest version, App Store, 2 stars."
+    },
+    "metrics": [
+      "Track median time from review posted to reply published.",
+      "Track the share of new reviews that received a reply each month.",
+      "Track how often drafts are approved unedited versus rewritten.",
+      "Track escalated reviews and whether each one got a support ticket."
+    ],
+    "faq": [
+      {
+        "q": "Will Google or Apple penalize AI-written replies?",
+        "a": "Their policies focus on what the reply says, not how it was drafted. Keep replies honest and specific, and keep a person approving them."
+      },
+      {
+        "q": "Can it reply in the reviewer's language?",
+        "a": "Yes. Tell it to reply in the language of the review, and have someone who reads that language spot-check replies at first."
+      },
+      {
+        "q": "What about Yelp or Trustpilot?",
+        "a": "The same pattern works anywhere with a reviews feed. Check each platform's API and policies, because some don't allow programmatic replies."
+      }
+    ],
+    "related": [
+      "support-ticket-triage-tagger",
+      "support-macro-drafter",
+      "tier-1-support-autopilot"
+    ]
+  },
+  "customer-interview-synthesizer": {
+    "problem": "For founders, PMs and researchers who run a round of customer interviews and then struggle to turn hours of transcripts into something the team will read. Synthesis tends to get skipped or biased toward the most memorable call. This agent produces a first-pass synthesis where every theme points back to the exact transcript lines behind it.",
+    "setupSteps": [
+      "Collect the transcripts in one Google Docs folder, one doc per interview, named with a participant code (P01, P02…) rather than real names.",
+      "Add a short research brief doc: the questions you set out to answer, who you interviewed (segment, role) and any hypotheses to test.",
+      "Give Claude the brief and the transcripts. With a large batch, process transcripts one at a time into structured notes first, then synthesize across the notes.",
+      "For each transcript, extract pains, current workarounds, tools mentioned, quotes worth keeping and moments of strong emotion, each tagged with the participant code and an approximate location.",
+      "Run a cross-interview pass that groups the notes into themes, counts how many participants mentioned each theme, and lists contradicting evidence.",
+      "Write the output into a new Google Doc using a fixed template: summary, themes, quotes, surprises, open questions and suggested next interviews.",
+      "Have the person who ran the interviews review the doc against their own notes before sharing it."
+    ],
+    "prompt": "You are a careful user-research analyst.\nInputs: a research brief and N interview transcripts labeled P01..PN.\nStep 1, per transcript: list pains, workarounds, tools mentioned and up to 5 verbatim quotes. Tag each with the participant ID and quote the exact words. Don't paraphrase inside quotation marks.\nStep 2, across transcripts: group the findings into 4-8 themes. For each theme give: a one-sentence statement, the participant IDs that support it (count them), 1-3 verbatim quotes, and any participants who said the opposite.\nRules:\n- Every claim must cite at least one participant ID. If you can't cite it, don't write it.\n- Separate what people said from what you infer. Label inferences \"Interpretation:\".\n- Don't generalize beyond the sample. Say \"4 of 9 participants\", not \"most users\".\n- End with open questions the interviews didn't answer.",
+    "guardrails": [
+      "Strip names, emails and company names from transcripts before sharing, or use participant codes throughout.",
+      "Every theme needs participant citations. Uncited claims get deleted.",
+      "Verbatim quotes are checked against the transcript before they appear in a deck.",
+      "A human researcher signs off on the synthesis. The agent's output is a draft.",
+      "Get participants' consent for recording and for using AI tools to process their transcripts."
+    ],
+    "example": {
+      "input": "Example input: 8 transcripts (P01-P08) from interviews with operations managers about how they track vendor renewals, plus a brief asking 'What triggers people to look for a new tool?'",
+      "output": "Example theme (illustrative):\nTheme: Renewals are discovered too late (P02, P03, P05, P07, 4 of 8)\nQuote: \"We found out about the auto-renewal when the charge hit the card.\" (P05)\nCounter-evidence: P06 uses a shared calendar and reported no missed renewals.\nInterpretation: a missed renewal may be the trigger moment for switching. Test this in the next round."
+    },
+    "metrics": [
+      "Track time from last interview to a shared synthesis doc.",
+      "Track how many themes survive the human review unchanged.",
+      "Track the share of quotes that needed correcting when checked against transcripts.",
+      "Track whether decisions or roadmap items cite the synthesis afterwards."
+    ],
+    "faq": [
+      {
+        "q": "How many transcripts can it handle at once?",
+        "a": "That depends on the model's context window. For more than a handful of long calls, do the per-transcript extraction first and synthesize across the shorter notes. It's also easier to check."
+      },
+      {
+        "q": "Can it replace a researcher?",
+        "a": "No. It speeds up the first pass and keeps quotes organized. Choosing what matters and spotting what's missing still needs someone who was in the interviews."
+      },
+      {
+        "q": "Does it work with auto-generated transcripts?",
+        "a": "Yes, but auto-transcripts mishear names and jargon, so verify any quote before you use it publicly."
+      }
+    ],
+    "related": [
+      "market-sizing-analyst",
+      "competitor-intel-daily-brief",
+      "meeting-to-tasks-operator"
+    ]
+  },
+  "grocery-meal-planner": {
+    "problem": "For busy people and families who end up deciding what's for dinner at 6 PM, buying duplicates of things already at home, and throwing food away at the end of the week. Meal planning works but takes a chunk of time on the weekend. This agent turns a two-minute check-in into a week of dinners and a shopping list sorted the way you walk the store.",
+    "setupSteps": [
+      "Write a household profile once and save it: who's eating, allergies and dietary rules, dislikes, cooking time on weeknights, kitchen equipment and a rough weekly grocery budget.",
+      "Keep a running pantry and fridge list in Apple Notes. Update it quickly before planning (or snap a photo of the fridge if your ChatGPT plan accepts images).",
+      "Each week, give ChatGPT the profile, the pantry list and any constraints for that week (a late night, guests, leftovers you want to use up).",
+      "Ask for 5-7 dinners that reuse ingredients across meals, use up what's expiring first, and fit your weeknight time limit.",
+      "Ask it to merge every ingredient into one grocery list, subtract what you already have, and group it by store section (produce, dairy, meat, pantry, frozen).",
+      "Paste the plan and the list into an Apple Notes checklist and share it with whoever does the shopping.",
+      "After the week, note which meals worked and which didn't, and add that to the profile so next week's plan is better."
+    ],
+    "prompt": "Plan dinners for this week.\nHousehold: {people, ages}. Allergies/rules: {list}. Dislikes: {list}.\nWeeknight cooking time: max {30} minutes. Budget: about {$X} for the week.\nAlready have: {pantry and fridge list}. Use first: {items expiring soon}.\nThis week: {e.g., Wednesday late, Saturday guests for 6}.\nOutput:\n1. A table: day, dinner, total time, key ingredients, which pantry items it uses.\n2. Plan ingredient reuse across meals to reduce waste. Say where.\n3. One combined grocery list that excludes what we already have, with quantities, grouped by: Produce, Meat & fish, Dairy & eggs, Bakery, Pantry, Frozen, Other.\n4. Flag any meal that could conflict with an allergy so I can double-check it.\nDon't estimate prices unless I give you store prices.",
+    "guardrails": [
+      "Allergies are hard rules. Always read ingredient labels yourself, because the agent can't see packaging or cross-contamination warnings.",
+      "Medical diets (diabetes, kidney disease, pregnancy) should follow advice from a doctor or dietitian, not the agent.",
+      "Treat price estimates as rough unless you supply real store prices.",
+      "Check the final list against the fridge before you shop, since pantry lists drift."
+    ],
+    "example": {
+      "input": "Example: 2 adults and 1 child, no nuts, 30-minute weeknights, have rice, eggs, half a bag of spinach (use soon), canned chickpeas and a block of cheddar.",
+      "output": "Example plan excerpt:\nMon: Spinach and cheddar frittata with toast (25 min), uses eggs, spinach, cheddar.\nTue: Chickpea and vegetable curry over rice (30 min), uses chickpeas, rice.\nExample list excerpt:\nProduce: 1 onion, 2 bell peppers, 1 bunch cilantro\nDairy & eggs: plain yogurt (for the curry)"
+    },
+    "metrics": [
+      "Track how many planned dinners you actually cooked each week.",
+      "Track food thrown out at the end of the week (a rough count is fine).",
+      "Track weekly grocery spend against your budget.",
+      "Track time spent planning and shopping compared with before."
+    ],
+    "faq": [
+      {
+        "q": "Can it use my grocery store's prices?",
+        "a": "Only if you give them to it. Paste prices from your store's app or receipts. Otherwise treat any cost as a rough guess."
+      },
+      {
+        "q": "Can it order the groceries too?",
+        "a": "This setup stops at the list. Some grocery delivery services let you paste or import a list, and you can check out yourself."
+      },
+      {
+        "q": "Is it safe for food allergies?",
+        "a": "Use it to plan, not to guarantee safety. It works from your list of rules, but it can't see labels or cross-contamination warnings, so you still need to check them."
+      }
+    ],
+    "related": [
+      "travel-planner",
+      "inbox-zero-chief-of-staff",
+      "job-application-tailor"
+    ]
+  },
+  "lead-list-enricher": {
+    "problem": "For founders and small sales teams who have a list of target companies but no budget for a big data provider. Researching each company by hand takes minutes per row, and guessed details make outreach worse, not better. This agent fills in the basics from public pages and clearly marks what it couldn't verify.",
+    "setupSteps": [
+      "Put the target list in Google Sheets with one company per row and a column for anything you already know (domain, city, source).",
+      "Add output columns: website, one-line description, industry, approximate size bucket (if stated publicly), personalization hook, source URL for the hook, confidence and notes.",
+      "Connect ChatGPT with web browsing (or pair it with a search API) so it can open the company's own site and recent public posts, not just answer from memory.",
+      "Process rows in batches of 20-50 from Apps Script, Zapier or your agent platform, writing results back to the sheet as it goes.",
+      "Require a source URL for every hook. If the agent can't find a public source, it writes NOT FOUND instead of filling the cell.",
+      "Spot-check 10% of rows by opening the source links before using any hook in an email.",
+      "Move verified rows into your outreach tool or CRM and keep the sheet as a log of what was researched and when."
+    ],
+    "prompt": "You enrich a list of companies for B2B outreach.\nFor each row (company name, optional domain):\n1. Find the official website. If there are several companies with that name, use the domain or location column to disambiguate. If it's still unclear, write AMBIGUOUS.\n2. Write one plain sentence on what the company does, based on its own site.\n3. Find one recent, specific, public detail that could open an email (a launch, a hiring post, a blog post, a new location). Include the exact source URL.\n4. Fill confidence: high (seen on their own site this month), medium (third-party source) or low.\n5. If you can't find something, write NOT FOUND. Never guess, and never invent people, numbers or events.\n6. Don't collect personal emails or phone numbers.",
+    "guardrails": [
+      "Every personalization hook needs a public source URL, or it isn't used.",
+      "NOT FOUND and AMBIGUOUS are acceptable answers. Made-up details are not.",
+      "Use company-level public information only. Personal contact data is out of scope here and is subject to privacy and anti-spam rules.",
+      "Respect website terms and robots rules, and keep request rates low.",
+      "A person reads the hook before it goes into any email."
+    ],
+    "example": {
+      "input": "Example row: 'Northwind Bakery Supply', domain unknown, city: Portland.",
+      "output": "Example enriched row (illustrative):\nwebsite: {northwind domain} | what they do: Wholesale baking ingredients for independent cafés in the Pacific Northwest. | hook: Their blog announced a new same-day delivery zone last month. | source: {blog URL} | confidence: high | notes: none"
+    },
+    "metrics": [
+      "Track the fill rate for each column and the share of NOT FOUND rows.",
+      "Track the error rate in your 10% spot-check.",
+      "Track reply rate on outreach that used a verified hook versus outreach that didn't.",
+      "Track time per enriched row compared with manual research."
+    ],
+    "faq": [
+      {
+        "q": "Is this a replacement for data providers?",
+        "a": "For small, targeted lists it can be enough. For contact-level data at scale, a provider with clear data-sourcing terms is usually the better choice."
+      },
+      {
+        "q": "Why does it leave so many blanks?",
+        "a": "That's by design. A blank is honest, and a guessed detail in a cold email does more harm than no detail at all."
+      },
+      {
+        "q": "Can it find the right person to contact?",
+        "a": "This playbook stays at company level. Finding and emailing individuals brings in privacy and anti-spam laws, so handle that step deliberately."
+      }
+    ],
+    "related": [
+      "cold-outreach-researcher",
+      "call-prep-brief",
+      "ai-sdr-that-books-meetings-from-inbound-leads"
+    ]
+  },
+  "vendor-contract-reviewer": {
+    "problem": "For operations, finance and procurement people at small companies who sign SaaS and service agreements without in-house legal. Auto-renewals, short notice windows and one-sided liability terms get missed until they matter. This agent produces a structured first-pass summary so you know what to ask a lawyer about. It doesn't replace one.",
+    "setupSteps": [
+      "Create a Google Drive folder for contracts under review and a second folder for the summaries. Give the agent read access to the first and write access to the second.",
+      "Write a checklist doc of what you always want pulled out: parties, term, renewal type, notice period and deadline, fees and increases, payment terms, termination rights, liability cap, indemnities, data protection, governing law and assignment.",
+      "Add your company's preferences (for example, 'we want at least 60 days' notice' or 'liability cap at least 12 months of fees') so the agent can flag deviations.",
+      "Have Claude read each new contract (PDF or Doc) and fill the checklist, quoting the exact clause text and section number for every item.",
+      "Ask for a separate 'unusual or one-sided clauses' list, each with a plain-English explanation and a suggested question for counsel.",
+      "Save the summary next to the contract and add the renewal notice deadline to a shared calendar or tracker.",
+      "Send anything high-value or flagged to a qualified lawyer, along with the summary, before signing."
+    ],
+    "prompt": "You are helping a non-lawyer do a first-pass review of a vendor contract. You are not giving legal advice.\nUsing the checklist doc, extract each item from the contract.\nFor each item: give the value in plain English, the section number, and the exact quoted clause text. If the contract doesn't address it, write \"Not addressed\".\nThen compare against our preferences doc and list deviations.\nThen list any unusual, one-sided or ambiguous clauses, each with: the section, why it might matter, and a question to ask our lawyer.\nCompute the latest date to send a non-renewal notice, if the contract has an auto-renewal, and show your arithmetic.\nDon't summarize away qualifiers like \"except\", \"unless\" or \"sole discretion\". Quote them.",
+    "guardrails": [
+      "This is an issue-spotting summary, not legal advice. A qualified lawyer reviews anything material before signing.",
+      "Every extracted term must quote the clause and section number so a person can verify it in seconds.",
+      "Double-check notice deadlines by hand, because date arithmetic and business-day rules are easy to get wrong.",
+      "Contracts may be confidential. Use an AI provider and settings your company has approved for confidential documents.",
+      "The agent never signs, sends or negotiates anything."
+    ],
+    "example": {
+      "input": "Example: a 14-page SaaS subscription agreement PDF for a project-management tool, with a 12-month initial term.",
+      "output": "Example summary excerpt (illustrative):\nRenewal: auto-renews for successive 12-month terms (Sec. 9.2: \"...shall automatically renew... unless either party gives notice at least sixty (60) days prior...\").\nNotice deadline: 60 days before the term end date. Add it to the tracker.\nDeviation: liability cap is fees paid in the prior 3 months (Sec. 12.1). Our preference is 12 months.\nQuestion for counsel: Sec. 4.3 allows price increases \"at Provider's sole discretion\" on renewal. Can we cap this?"
+    },
+    "metrics": [
+      "Track the number of contracts reviewed and how many had flagged deviations.",
+      "Track renewal deadlines captured in the tracker versus renewals that surprised you.",
+      "Track how often the lawyer's review found an issue the summary missed, and add those to the checklist.",
+      "Track time from receiving a contract to having a summary ready."
+    ],
+    "faq": [
+      {
+        "q": "Can I skip the lawyer if the summary looks fine?",
+        "a": "For low-value, standard click-through terms, many teams accept that risk themselves. For anything material, don't. The summary is there to make the lawyer's review faster and cheaper, not to replace it."
+      },
+      {
+        "q": "Does it work on scanned PDFs?",
+        "a": "Only if the text is readable. Run OCR first and spot-check quoted clauses against the original."
+      },
+      {
+        "q": "Can it redline the contract?",
+        "a": "It can suggest wording, but treat that as a starting point for counsel. Negotiated changes should come from someone accountable for them."
+      }
+    ],
+    "related": [
+      "rfp-answer-assistant",
+      "subscription-audit",
+      "invoice-chaser"
+    ]
+  },
+  "market-sizing-analyst": {
+    "problem": "For founders, product managers and analysts who need a defensible market-size estimate for a pitch, a business case or a go/no-go decision. Market sizes copied from press releases are often unsourced or don't fit the niche. This agent builds the estimate bottom-up in a spreadsheet, so every number has a source or a labeled assumption you can challenge.",
+    "setupSteps": [
+      "Write a one-paragraph definition of the niche: the customer, geography, what you sell and the pricing model. Vague definitions produce meaningless numbers.",
+      "Set up a Google Sheet with tabs for Sources, Assumptions, Bottom-up model and Top-down cross-check.",
+      "Let the agent use web search to find public inputs: government statistics, industry association counts, public company filings and pricing pages. Every input goes in Sources with a URL and date.",
+      "Build the bottom-up model in Sheets: number of target customers × share that fits your definition × expected annual price. Keep each factor in its own cell so it can be changed.",
+      "Ask for a top-down cross-check from a different source. If the two estimates differ widely, the agent should explain why instead of averaging them.",
+      "Have the agent write a one-page memo covering the definition, the TAM/SAM/SOM ranges, key assumptions, the weakest inputs and what would change the answer.",
+      "Review the assumptions tab yourself and adjust anything that doesn't match what you know about the market."
+    ],
+    "prompt": "You are a careful market-sizing analyst.\nNiche definition: {customer, geography, product, pricing model}.\n1. Search for public data to size the number of potential customers. Record each figure in the Sources tab with the URL, publisher, date and the exact figure.\n2. Build a bottom-up estimate: customers × fit rate × annual price. Use ranges (low/base/high), not single numbers.\n3. Label every number that isn't directly from a source as an ASSUMPTION, with a one-line rationale.\n4. Do a top-down cross-check with a different source. Explain any big gap.\n5. Define TAM, SAM and SOM explicitly for this niche and keep SOM tied to a realistic share you can defend.\n6. Write a one-page memo. Include: method, ranges, the 3 weakest assumptions and what data would improve them.\nNever present a figure without a source or an ASSUMPTION label. Don't cite reports you couldn't open.",
+    "guardrails": [
+      "No unsourced figures. Every number is either linked to a source or labeled as an assumption.",
+      "Use ranges rather than false precision.",
+      "Open and check any source cited in a pitch deck or investor memo yourself, because pages change and the agent can misread tables.",
+      "Watch for paywalled reports quoted second-hand, and mark them as unverified.",
+      "The memo is a decision aid. Final numbers are owned by a person."
+    ],
+    "example": {
+      "input": "Example niche: 'Scheduling software for independent physiotherapy clinics in Canada, sold per clinic per month.'",
+      "output": "Example memo structure (values left as placeholders):\nDefinition: independent physio clinics in Canada, 1-10 practitioners.\nBottom-up SAM (base): {clinic count from source A} × {fit rate, ASSUMPTION} × {annual price from pricing research} = {range}.\nTop-down check: {figure from source B}. Gap explained by {reason}.\nWeakest assumptions: fit rate, share already locked into multi-year contracts, average practitioners per clinic."
+    },
+    "metrics": [
+      "Track how many inputs are sourced versus assumptions.",
+      "Track how much the estimate moves when you vary each assumption (a sensitivity check).",
+      "Track time to produce a first estimate compared with doing it by hand.",
+      "Track which assumptions were later confirmed or contradicted by sales data."
+    ],
+    "faq": [
+      {
+        "q": "What's the difference between TAM, SAM and SOM?",
+        "a": "TAM is the total demand for the category, SAM is the part your product and go-to-market can actually serve, and SOM is the share you can realistically win in a given time frame. Define all three for your specific niche."
+      },
+      {
+        "q": "Can I put this in an investor deck?",
+        "a": "Yes, as long as you can defend every input. Investors tend to trust a transparent bottom-up model more than a large top-down number."
+      },
+      {
+        "q": "Why ranges instead of one number?",
+        "a": "Most inputs are uncertain. Ranges show that honestly and make it clear which assumption drives the result."
+      }
+    ],
+    "related": [
+      "competitor-intel-daily-brief",
+      "customer-interview-synthesizer",
+      "weekly-metrics-report"
+    ]
+  },
+  "docs-localization-agent": {
+    "problem": "For product and engineering teams that ship in more than one language and keep falling behind on translations. Re-translating whole files is slow and expensive, and inconsistent terminology confuses users. This agent translates only what changed, uses your glossary, and leaves the final say to a native speaker in a pull request.",
+    "setupSteps": [
+      "Keep source strings in a predictable place in GitHub, such as locale files (en.json, messages.po) and a docs folder in Markdown, with one file per language.",
+      "Create a DeepL glossary for each target language with product names, feature names and terms that must never be translated. Keep the source of truth in the repo.",
+      "Add a GitHub Action (or agent trigger) that runs when English strings or docs change on the main branch and computes the diff of new and changed keys or paragraphs.",
+      "Send only the changed text to the DeepL API with the glossary, preserving placeholders like {name}, %s and HTML or Markdown formatting.",
+      "Validate the output: placeholders unchanged, valid JSON or PO syntax, no empty strings, and length warnings for UI strings that might overflow buttons.",
+      "Open one pull request per language with the translated diff, labeled for review and assigned to that language's reviewer.",
+      "Merge only after a native or fluent speaker approves, and add their recurring corrections to the glossary."
+    ],
+    "prompt": "You maintain translations for {Product}.\nWhen English source files change:\n1. Diff against the last translated commit. Collect only new or modified keys and paragraphs. Never re-translate unchanged text.\n2. Translate each item into {languages} with DeepL and the language's glossary.\n3. Preserve exactly: placeholders ({var}, %s, %d), HTML tags, Markdown links, code blocks and product names on the do-not-translate list.\n4. Validate file syntax, and flag any UI string whose translation is more than 40% longer than the English.\n5. Open one PR per language titled \"i18n({lang}): {N} updated strings\", listing each key with its English source and the translation, and noting any validation warnings.\n6. Never merge. Request review from the reviewer for that language.",
+    "guardrails": [
+      "Machine translations are never merged without a human reviewer for that language.",
+      "Glossary and do-not-translate terms are enforced, and the reviewer's corrections go back into the glossary.",
+      "Automated checks block PRs with broken placeholders or invalid syntax.",
+      "Have legal, pricing, safety and medical text translated or reviewed by a qualified professional.",
+      "Use a DeepL API key scoped to this repo's automation and stored as a CI secret, never committed."
+    ],
+    "example": {
+      "input": "Example diff: en.json adds \"export.button\": \"Export {count} files\" and changes the docs paragraph about workspace limits.",
+      "output": "Example PR for German (illustrative):\nTitle: i18n(de): 2 updated strings\n- export.button: \"Export {count} files\" → \"{count} Dateien exportieren\" (placeholder preserved)\n- docs/workspaces.md, paragraph 3: translated with glossary term \"Workspace\" kept as-is\nWarnings: none"
+    },
+    "metrics": [
+      "Track time from an English change merging to the translated version merging.",
+      "Track the share of machine-translated strings the reviewer edits.",
+      "Track validation failures caught before review (broken placeholders, syntax).",
+      "Track untranslated keys per language over time."
+    ],
+    "faq": [
+      {
+        "q": "Why DeepL instead of a general chatbot?",
+        "a": "DeepL has a translation API with glossary support, which keeps terminology consistent. You can swap in another model, but keep the glossary and validation steps."
+      },
+      {
+        "q": "Do we still need translators?",
+        "a": "Yes, as reviewers. The agent removes the blank-page work, and fluent people make sure it reads naturally and correctly."
+      },
+      {
+        "q": "How do we handle plurals and gender?",
+        "a": "Use your i18n library's plural and select formats (for example ICU MessageFormat) in the source, and validate that the translation keeps that structure."
+      }
+    ],
+    "related": [
+      "release-notes-writer",
+      "pr-review-bug-fix-agent",
+      "codebase-onboarding-guide"
+    ]
+  },
+  "sql-question-answerer": {
+    "problem": "For startups and small data teams where everyone has questions for the database but only a few people write SQL. The analyst becomes a bottleneck for simple questions, and ad-hoc queries run with production credentials are risky. This agent writes and runs read-only SQL and always shows the query, so answers can be checked.",
+    "setupSteps": [
+      "Create a dedicated Postgres role with SELECT-only access to an approved set of tables or views, ideally on a read replica. Set statement_timeout and a row limit for that role.",
+      "Write a schema guide: what each approved table means, how key columns are defined (for example, what counts as an 'active customer'), and common joins. Accurate answers depend on this guide more than anything else.",
+      "Exclude or mask sensitive columns (emails, payment details, free-text notes) by exposing views instead of raw tables.",
+      "Connect Claude to the database through a tool that only accepts the read-only role, and have it list the schema and read the guide before writing queries.",
+      "Require every answer to show the SQL, the result table and a one-sentence plain-English interpretation, plus any assumptions it made about definitions.",
+      "For questions that will be asked again, save the query as a Metabase question or dashboard so the number has one owner and one definition.",
+      "Have the data owner review a log of questions and queries each week, and fix the schema guide where the agent picked the wrong table or definition."
+    ],
+    "prompt": "You answer questions about our data using Postgres. You have a READ-ONLY role.\nBefore writing SQL, read the schema guide and use its metric definitions exactly.\nFor each question:\n1. Restate the question and any assumption (time range, timezone, what \"active\" means).\n2. Write a single SELECT query. Never use INSERT, UPDATE, DELETE, DDL or functions with side effects. Always include a LIMIT for row-level results.\n3. Run it, then show: the SQL, the result (max 50 rows) and a 1-2 sentence interpretation.\n4. If the question is ambiguous or the needed data isn't in the approved tables, say so and ask instead of guessing.\n5. Never show columns marked sensitive in the guide.\n6. If the query will be reused, suggest saving it in Metabase.",
+    "guardrails": [
+      "Database-enforced read-only role. Don't rely on the prompt alone to prevent writes.",
+      "Statement timeout and row limits protect production performance. Use a replica when you can.",
+      "Sensitive data stays behind views or masking, and the agent can't query raw tables containing it.",
+      "Every answer shows its SQL so a person can check the logic.",
+      "Numbers used in board decks or decisions are confirmed by the data owner or come from a saved Metabase question."
+    ],
+    "example": {
+      "input": "Example question from Slack: \"How many new paying customers did we get each month this year?\"",
+      "output": "Example answer (illustrative):\nAssumption: 'paying customer' = first successful payment, months in UTC.\nSQL:\nSELECT date_trunc('month', first_paid_at) AS month, count(*) AS new_paying\nFROM analytics.customers_v\nWHERE first_paid_at >= date_trunc('year', now())\nGROUP BY 1 ORDER BY 1;\nResult: {table of months and counts}\nInterpretation: {one sentence describing the trend in the returned numbers}"
+    },
+    "metrics": [
+      "Track the share of answers the data owner marks correct in the weekly review.",
+      "Track questions answered by the agent versus escalated to an analyst.",
+      "Track query timeouts and the slowest queries.",
+      "Track how many reused questions became saved Metabase questions."
+    ],
+    "faq": [
+      {
+        "q": "Is it safe to connect an AI to our production database?",
+        "a": "Only through a read-only role with timeouts, limited to approved views and ideally on a replica. Let the database enforce permissions rather than the prompt."
+      },
+      {
+        "q": "Why does it keep asking clarifying questions?",
+        "a": "Most data questions hide a definition (active, churned, revenue). A good schema guide answers those up front and cuts down the follow-ups."
+      },
+      {
+        "q": "Does it replace Metabase or our BI tool?",
+        "a": "No. It's good for one-off questions, and the BI tool is where agreed metrics and dashboards live. Promote anything recurring into Metabase."
+      }
+    ],
+    "related": [
+      "weekly-metrics-report",
+      "churn-risk-flagger",
+      "market-sizing-analyst"
+    ]
+  },
+  "podcast-show-notes": {
+    "problem": "For independent podcasters and small content teams who finish recording and then lose hours writing show notes, chapter markers and social snippets. Those tasks get rushed or skipped, which hurts discoverability and makes episodes harder to skim. This agent produces a full first draft from the transcript, ready for a quick human edit.",
+    "setupSteps": [
+      "Export the final edited audio and run it through Whisper (locally or through an API) to get a transcript with timestamps. Use the edited audio, not the raw recording, so timestamps match what listeners hear.",
+      "Keep a short show style guide: episode-notes template, tone, how you credit guests, standard links and sponsor-read rules.",
+      "Give ChatGPT the timestamped transcript, the style guide and the episode metadata (title, guest name, guest links you have permission to share).",
+      "Ask for show notes (a 2-3 sentence summary plus key topics), 5-10 chapters with timestamps taken from the transcript, and 3-5 verbatim pull quotes with timestamps.",
+      "Check the chapter timestamps against the audio player for the first few episodes, then spot-check one or two per episode after that.",
+      "Paste the approved notes into your podcast host and add the chapters in the format your host supports.",
+      "Reuse the pull quotes for social posts after confirming each one is word-for-word from the audio."
+    ],
+    "prompt": "You write show notes for {Podcast name}.\nInput: a timestamped transcript of the final edited episode, the style guide and episode metadata.\nProduce:\n1. Summary: 2-3 sentences on what the episode covers and who it's for. No hype words.\n2. Topics covered: 4-6 bullets.\n3. Chapters: 5-10 entries as \"MM:SS Title\". Use only timestamps that appear in the transcript, and start the first chapter at 00:00.\n4. Pull quotes: 3-5 verbatim quotes, with speaker and timestamp. Copy the words exactly, and only light filler-word removal is allowed, marked with \"…\".\n5. Links: only links listed in the metadata. Never invent URLs or resources mentioned in passing. List those under \"Mentioned (needs link)\".\nFollow the style guide.",
+    "guardrails": [
+      "Only use quotes that exist verbatim in the transcript, and check them against the audio before posting publicly.",
+      "No invented links. Anything mentioned without a supplied URL is flagged for the host.",
+      "Transcripts mishear names and jargon, so a person checks spelling of guests, companies and products.",
+      "Get guests' approval before sharing their social links or personal details.",
+      "Sponsor mentions follow your disclosure rules and are written by a person."
+    ],
+    "example": {
+      "input": "Example: a 48-minute interview episode with a timestamped Whisper transcript and metadata listing the guest's website.",
+      "output": "Example output excerpt (illustrative):\nChapters:\n00:00 Intro\n03:12 How the guest got started\n17:45 The mistake that changed their pricing\n31:20 Listener questions\nPull quote: \"We stopped asking what features people wanted and started asking what they did last Tuesday.\" ({Guest}, 18:02)\nMentioned (needs link): the book the guest recommended at 39:10"
+    },
+    "metrics": [
+      "Track time from final audio to published show notes.",
+      "Track how many chapter timestamps needed correcting.",
+      "Track edits made to the summary before publishing.",
+      "Track episode page visits or search impressions before and after adding chapters and fuller notes."
+    ],
+    "faq": [
+      {
+        "q": "Does it work with interviews that have several speakers?",
+        "a": "Yes. Use a transcription setup that labels speakers (diarization), or add speaker names in a quick pass so quotes are attributed correctly."
+      },
+      {
+        "q": "Why use the edited audio?",
+        "a": "Cuts change the timing. A transcript of the raw recording will put chapters at the wrong times."
+      },
+      {
+        "q": "Can it write the episode title?",
+        "a": "Ask for 3-5 options and pick one yourself. Titles carry your voice and your promise to listeners."
+      }
+    ],
+    "related": [
+      "video-to-thread-repurposer",
+      "blog-post-from-outline",
+      "newsletter-ghostwriter"
+    ]
+  },
+  "refund-order-status-agent": {
+    "problem": "For small e-commerce teams whose support inbox is mostly 'where is my order?' and simple refund requests. Each one means opening Shopify, finding the order, copying the tracking link and replying, which takes time away from the questions that actually need a person. This agent handles those lookups and small, policy-compliant refunds, and passes everything else to a human.",
+    "setupSteps": [
+      "Connect Shopify with a custom app limited to the scopes you need: read orders and fulfillments, plus refunds only if you plan to automate them. Use Stripe directly only if payments aren't processed through Shopify.",
+      "Write your refund policy as explicit rules: eligible reasons, time window, maximum automatic amount, one automatic refund per customer per period, and items that are never auto-refunded.",
+      "Verify identity before sharing order details. Require the order number and the email on the order to match.",
+      "For order status, have the agent read fulfillment status and the carrier tracking link from Shopify and reply with what the data shows, not an estimate it invents.",
+      "Start refunds in approval mode: the agent prepares the refund (order, line items, amount, reason) and a person approves it in your helpdesk or Slack.",
+      "Log every action in the ticket: what was looked up, what was said and any refund with its amount and policy rule.",
+      "After a few weeks of approvals, decide whether refunds under your threshold can run automatically. Keep everything above it manual."
+    ],
+    "prompt": "You are a support agent for {Store}.\nFor each customer message:\n1. Classify it: order status, refund request or other. Hand off \"other\" to a human with a one-line summary.\n2. Verify: the order number and customer email must match the Shopify order. If they don't, ask for both. Never reveal order details before they match.\n3. Order status: reply with the fulfillment status and tracking link from Shopify. If there's no tracking yet, say so and give the processing time from our policy. Never promise a delivery date the carrier hasn't shown.\n4. Refund: check the request against the refund policy rules. If it's eligible and under {threshold}, prepare the refund for approval (or issue it, if auto-refunds are enabled) and tell the customer what happens next. If it's not eligible or over the threshold, hand off to a human. Don't refuse on your own.\n5. Log everything you did in the ticket.",
+    "guardrails": [
+      "Identity check (order number + email) before any order details are shared.",
+      "Refunds follow written policy rules with a hard amount cap that's enforced in code, not just in the prompt.",
+      "Anything outside policy (exceptions, chargebacks, angry or legal language) goes to a person.",
+      "Shopify app scopes are limited to what the agent needs, with separate credentials you can revoke.",
+      "Every refund is logged with amount, reason and rule, and someone reviews the log weekly."
+    ],
+    "example": {
+      "input": "Example message: \"Hi, order #1087 hasn't arrived and it's been a week. My email is jo@example.com.\"",
+      "output": "Example reply (illustrative):\n\"Hi Jo, thanks for getting in touch. Order #1087 shipped on Oct 14 with {carrier}, and the latest tracking update shows it's in transit. You can follow it here: {tracking link}. If it hasn't arrived by {date from our shipping policy}, reply here and we'll sort it out.\"\nTicket log: order #1087 verified (email match); fulfillment: shipped; no refund action."
+    },
+    "metrics": [
+      "Track the share of tickets resolved without a human handoff, broken down by order status versus refunds.",
+      "Track first-response time for order-status questions.",
+      "Track refund totals processed by the agent each week, and any refund later reversed or disputed.",
+      "Track customer replies after an agent answer that indicate confusion or a wrong answer."
+    ],
+    "faq": [
+      {
+        "q": "Should the agent be allowed to refund automatically?",
+        "a": "Start with approval mode. Once your logs show it follows the policy, many stores allow small automatic refunds under a hard cap and keep larger ones manual."
+      },
+      {
+        "q": "What if tracking shows delivered but the customer says it isn't there?",
+        "a": "That's a classic handoff case. Lost-package claims involve carrier claims and fraud checks, so a person should handle them."
+      },
+      {
+        "q": "Does it work with helpdesks like Gorgias or Zendesk?",
+        "a": "Yes. The helpdesk holds the conversation, and the agent reads and writes through its API while pulling order data from Shopify."
+      }
+    ],
+    "related": [
+      "tier-1-support-autopilot",
+      "support-ticket-triage-tagger",
+      "support-macro-drafter"
+    ]
+  }
+}

@@ -97,7 +97,8 @@
       "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
-    "link": ""
+    "link": "",
+    "seoDescription": "An AI support agent for Shopify stores that answers 'where is my order', looks up tracking, and handles small refunds through Stripe under a clear policy threshold."
   },
   {
     "slug": "competitor-intel-daily-brief",
@@ -140,7 +141,8 @@
       "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
-    "link": ""
+    "link": "",
+    "seoDescription": "Build a sourced TAM/SAM/SOM estimate for a niche with an AI agent, web search and Google Sheets, with every assumption visible, then get a one-page memo."
   },
   {
     "slug": "newsletter-ghostwriter",
@@ -206,7 +208,8 @@
       "Run it on 5–10 real examples and review outputs.",
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
-    "link": ""
+    "link": "",
+    "seoDescription": "Set up an AI agent that watches unpaid invoices in QuickBooks or Stripe, drafts polite escalating reminders in Gmail, and flags accounts 30+ days overdue."
   },
   {
     "slug": "meeting-to-tasks-operator",
@@ -373,7 +376,8 @@
       "Require a transcript reference for every quote so you can verify.",
       "Review and edit the themes doc before sharing it with the team."
     ],
-    "link": ""
+    "link": "",
+    "seoDescription": "Turn a batch of customer interview transcripts into themes, direct quotes and open questions in Google Docs, with every claim linked to its source, using Claude."
   },
   {
     "slug": "support-macro-drafter",
@@ -465,7 +469,8 @@
       "Check timestamps against the audio.",
       "Paste into your podcast host and episode page."
     ],
-    "link": "https://github.com/openai/whisper"
+    "link": "https://github.com/openai/whisper",
+    "seoDescription": "Turn a podcast transcript into show notes, timestamped chapters and pull quotes with Whisper and ChatGPT. Setup steps, a prompt, guardrails and an example."
   },
   {
     "slug": "weekly-metrics-report",
@@ -510,7 +515,8 @@
       "Ask for 5 dinners that reuse ingredients, plus a grocery list grouped by aisle.",
       "Save as a checklist in your notes app; tweak and reuse winning weeks."
     ],
-    "link": ""
+    "link": "",
+    "seoDescription": "Plan a week of dinners around your diet, budget and what's already in the fridge with ChatGPT, then get a grocery list grouped by aisle in Apple Notes."
   },
   {
     "slug": "vendor-contract-reviewer",
@@ -532,7 +538,8 @@
       "Ask it to quote the exact clause for each item.",
       "Flag anything unusual; get legal review for anything that matters. This is not legal advice."
     ],
-    "link": ""
+    "link": "",
+    "seoDescription": "Use Claude to do a first-pass review of vendor contracts in Google Drive: renewal terms, notice periods, liability caps and unusual clauses, ready to take to a lawyer."
   },
   {
     "slug": "test-writer-for-legacy-code",
@@ -621,7 +628,8 @@
       "Require 'not found' instead of guesses.",
       "Spot-check 10 rows before using the list for outreach."
     ],
-    "link": ""
+    "link": "",
+    "seoDescription": "Enrich a CSV of company names in Google Sheets with ChatGPT: website, what they do, and a one-line personalization hook from public pages, with gaps clearly marked."
   },
   {
     "slug": "call-prep-brief",
@@ -667,7 +675,8 @@
       "Append rows to a sheet; flag low-confidence items for review.",
       "Reconcile against your bank statement monthly."
     ],
-    "link": ""
+    "link": "",
+    "seoDescription": "An AI agent that reads receipts forwarded to Gmail, extracts vendor, amount, date and category, and logs them in Google Sheets for monthly bookkeeping."
   },
   {
     "slug": "subscription-audit",
@@ -733,7 +742,8 @@
       "Have it always show the SQL alongside the answer.",
       "Review wrong answers and add them as examples to the prompt."
     ],
-    "link": ""
+    "link": "",
+    "seoDescription": "Let teammates ask database questions in plain English: Claude writes read-only SQL for Postgres, runs it safely, and shows the query and result, with Metabase for charts."
   },
   {
     "slug": "review-response-drafter",
@@ -756,7 +766,8 @@
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
     "link": "",
-    "addedAt": "2026-10-16"
+    "addedAt": "2026-10-16",
+    "seoDescription": "Use an AI agent to draft on-brand replies to Google Business Profile and App Store reviews, route them to Slack for approval, and escalate bug or refund complaints."
   },
   {
     "slug": "incident-postmortem-drafter",
@@ -912,6 +923,7 @@
       "Schedule it (cron or trigger) and review a weekly digest."
     ],
     "link": "",
-    "addedAt": "2026-10-16"
+    "addedAt": "2026-10-16",
+    "seoDescription": "Localize docs and UI strings automatically: an AI agent translates only the changed text with DeepL and a glossary, then opens a GitHub PR for native-speaker review."
   }
 ]
